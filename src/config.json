@@ -1,0 +1,7 @@
+{
+  "weatherApiUrl": "http://api.openweathermap.org/data/2.5/weather?q=",
+  "weatherApiKey": "ce68b8712ca3a2b635771766ee04aebb",
+  "weatherFetchInterval": "6",
+  "imagesUrl": "/images",
+  "genericErrorMessage": "Sorry, something went wrong. Please try again."
+}

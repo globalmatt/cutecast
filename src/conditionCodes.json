@@ -1,0 +1,23 @@
+{
+  "200": "Thunderstorms and light rain",
+  "201": "Thunderstorms and moderate rain",
+  "202": "Thunderstorm and heavy rain",
+  "210": "Light thunderstorms",
+  "211": "Thunderstorms",
+  "212": "Heavy thunderstorms",
+  "221": "Ragged thunderstorms",
+  "230": "Thunderstorms and light drizzle",
+  "231": "Thunderstorms and drizzle",
+  "232": "Thunderstorms and heavy drizzle",
+  "800": {
+    "day": "Sunny",
+    "night": "Clear"
+  },
+  "801": {
+    "day": "Mostly sunny",
+    "night": "Mostly clear"
+  },
+  "802": "Scattered clouds",
+  "803": "Broken clouds",
+  "804": "Overcast clouds"
+}

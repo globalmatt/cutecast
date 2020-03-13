@@ -1,0 +1,22 @@
+[
+  {
+    "url": "EllieNiceDayUnicorn.jpg",
+    "conditionCodes": [800, 801],
+    "daytime": true
+  },
+  {
+    "url": "sunflowers.jpg",
+    "conditionCodes": [800, 801],
+    "daytime": true
+  },
+  {
+    "url": "scatteredClouds.jpg",
+    "conditionCodes": [802],
+    "daytime": true
+  },
+  {
+    "url": "scatteredCloudsNight.jpg",
+    "conditionCodes": [802],
+    "daytime": false
+  }     
+]

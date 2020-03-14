@@ -18,5 +18,10 @@
     "url": "scatteredCloudsNight.jpg",
     "conditionCodes": [802],
     "daytime": false
-  }     
+  },   
+  {
+    "url": "overcastClouds.jpg",
+    "conditionCodes": [804],
+    "daytime": true
+  }  
 ]

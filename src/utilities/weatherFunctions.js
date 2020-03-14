@@ -46,7 +46,11 @@ export function getWeatherImageUrl(currentWeatherData) {
   );
   console.log(suitableImages);
 
-  return imagesUrl + '/' + (suitableImages[Math.floor(Math.random() * suitableImages.length)]).url;
+  if ( suitableImages.length > 0 ) {
+    return imagesUrl + '/' + (suitableImages[Math.floor(Math.random() * suitableImages.length)]).url;
+  } else {
+    return null;
+  }
 }
 
 function kelvinsToCelsius(t) {

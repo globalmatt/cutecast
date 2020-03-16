@@ -1,7 +1,8 @@
 import React, {useContext, useState, useLayoutEffect, useEffect} from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ReactPullToRefresh from 'react-pull-to-refresh';
 import ErrorBoundary from './components/ErrorBoundary';
-//import TestComponent from './components/TestComponent';
 import './App.css';
 import './PullToRefresh.css';
 import {Context} from './Context';
@@ -12,10 +13,12 @@ function App() {
   const [weatherImageHeight, setWeatherImageHeight] = useState(0);
 
   // https://javascript.info/promise-error-handling
+  // (doesn't seem to work - how can we catch the rejected Promise in handleRefresh()?)
   useEffect( () => {
     window.addEventListener('unhandledrejection', function(event) {
       // the event object has two special properties:
-      alert(event.promise); // [object Promise] - the promise that generated the error
+      console.log('caught rejection');
+      toast("Oops, something went wrong! Please try again."); // [object Promise] - the promise that generated the error
       //alert(event.reason); // Error: Whoops! - the unhandled error object
     });
   }, []);
@@ -36,7 +39,6 @@ function App() {
     console.log('refresh');
     fetchCurrentWeather();
     resolve();
-
     //reject(new Error('Promise failed'));
   }
 

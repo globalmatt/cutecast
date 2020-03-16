@@ -10,10 +10,10 @@ const Context = createContext();
 
 function ContextProvider({children}) {
 
-  const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useStateWithLocalStorage('currentWeatherDataRaw', {});
-  const [currentWeatherData, setCurrentWeatherData] = useStateWithLocalStorage('currentWeatherData', {});
-  const [lastWeatherFetchTime, setLastWeatherFetchTime] = useStateWithLocalStorage('lastWeatherFetchTime', 0);
-  const [currentWeatherImageUrl, setCurrentWeatherImageUrl] = useStateWithLocalStorage('currentWeatherImageUrl', "");
+  const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState({});
+  const [currentWeatherData, setCurrentWeatherData] = useState({});
+  const [lastWeatherFetchTime, setLastWeatherFetchTime] = useState(0);
+  const [currentWeatherImageUrl, setCurrentWeatherImageUrl] = useState("");
   const [totalImagesLoaded, setTotalImagesLoaded] = useState(0);
   const [areAllImagesLoaded, setAreAllImagesLoaded] = useState(false);
 
@@ -41,8 +41,9 @@ function ContextProvider({children}) {
       })
       .catch(err => console.log(err));
     },
-    [lastWeatherFetchTime, setCurrentWeatherDataRaw, setLastWeatherFetchTime]
+    [lastWeatherFetchTime]
   );
+
 
   // App boot
   useEffect(
@@ -53,19 +54,22 @@ function ContextProvider({children}) {
     [fetchCurrentWeather]
   );
 
+
   // Extract the raw data and use it to set the current weather data
   useEffect( () => {
     if ( Object.entries(currentWeatherDataRaw).length > 0 ) {
       setCurrentWeatherData(extractCurrentWeatherData(currentWeatherDataRaw));
     }
-  }, [currentWeatherDataRaw, setCurrentWeatherData]);
+  }, [currentWeatherDataRaw]);
   
+
   // Pick an image for the current weather
   useEffect( () => {
     if ( Object.entries(currentWeatherData).length > 0 ) {
       setCurrentWeatherImageUrl(getWeatherImageUrl(currentWeatherData));
     }
-  }, [currentWeatherData, setCurrentWeatherImageUrl]);
+  }, [currentWeatherData]);
+
 
   // Set the areAllImagesLoaded state variable to true once all images have preloaded
   useEffect( () => {
@@ -75,11 +79,13 @@ function ContextProvider({children}) {
     }
   }, [totalImagesLoaded]);
 
+
   // Record a successfully-loaded image
   function handleImageLoad() {
     setTotalImagesLoaded( prevTotalImagesLoaded => prevTotalImagesLoaded + 1 );
   }
 
+  // Render the provider and children
   return(
     <Context.Provider value={{
       currentWeatherData,

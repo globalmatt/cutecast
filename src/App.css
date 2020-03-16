@@ -1,8 +1,10 @@
 html, body {margin: 0; height: 100%; overflow: hidden}
 
+/*
 body, #root {
   overflow: hidden;
 }
+*/
 
 .content {
   position: absolute;
@@ -15,6 +17,7 @@ body, #root {
   color: #fff;
   overflow: hidden;
   padding: 10px;
+  box-sizing: border-box;
 
 }
 .weatherImage {
@@ -26,15 +29,18 @@ body, #root {
   height: 100%;
   background: #fff;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
 }
 
 .weatherImage img {
   width: 100%;
-  height: 100%;
+  height: 0; /* Calculate dynamically because height: 100% disappears with pull-to-refresh */
   object-fit: cover;
+}
 
+.container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: red;
 }

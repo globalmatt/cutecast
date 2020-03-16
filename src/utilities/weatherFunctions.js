@@ -31,6 +31,7 @@ export function extractCurrentWeatherData(rawData) {
 
 // Preload the weather images in the browser
 export function preloadWeatherImages(imageLoadHandler) {
+  console.log('preloadWeatherImages');
   weatherImages.forEach( img => {
     const i = new Image();
     i.src = imagesUrl + '/' + img.url;

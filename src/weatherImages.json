@@ -16,7 +16,7 @@
   },
   {
     "url": "scatteredCloudsNight.jpg",
-    "conditionCodes": [802],
+    "conditionCodes": [802, 804],
     "daytime": false
   },   
   {

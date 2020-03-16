@@ -18,6 +18,11 @@
     "url": "scatteredCloudsNight.jpg",
     "conditionCodes": [802, 804],
     "daytime": false
+  },  
+  {
+    "url": "brokenClouds.jpg",
+    "conditionCodes": [803],
+    "daytime": true
   },   
   {
     "url": "overcastClouds.jpg",

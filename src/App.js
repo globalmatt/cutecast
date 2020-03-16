@@ -7,6 +7,7 @@ import './App.css';
 import './PullToRefresh.css';
 import Header from './components/Header';
 import CurrentWeatherImage from './components/CurrentWeatherImage';
+import Footer from './components/Footer';
 import {Context} from './Context';
 
 function App() {
@@ -35,19 +36,20 @@ function App() {
 
   return (
     <ErrorBoundary>
-        <div className="App">
+      <div className="App">
         <ReactPullToRefresh
           onRefresh={handleRefresh}
           style={{
             textAlign: 'center'
-          }}>
+        }}>
           <div id="content">
             <Header currentWeatherData={currentWeatherData} />
             <CurrentWeatherImage currentWeatherImageUrl={currentWeatherImageUrl} />
+            <Footer />
           </div>
-          </ReactPullToRefresh>  
-        </div>
-        </ErrorBoundary>
+        </ReactPullToRefresh>  
+      </div>
+    </ErrorBoundary>
   );
 }
 

@@ -6,6 +6,10 @@ body, #root {
 }
 */
 
+#root, .App, .App>div, .refresh-view {
+  height: 100% !important;
+}
+
 .content {
   position: absolute;
   z-index: 2;
@@ -28,12 +32,11 @@ body, #root {
   width: 100%;
   height: 100%;
   background: #fff;
-
 }
 
 .weatherImage img {
   width: 100%;
-  height: 0; /* Calculate dynamically because height: 100% disappears with pull-to-refresh */
+  height: 100%;
   object-fit: cover;
 }
 
@@ -43,4 +46,33 @@ body, #root {
   height: 100%;
   z-index: 1;
   background: red;
+}
+
+.footer {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: rgba(0,0,0,.6); 
+  color: #fff;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;  
+}
+
+.footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer nav li {
+  display: inline-block;
+  padding: 5px;
+}
+
+.footer nav li a {
+  color: #fff;
 }

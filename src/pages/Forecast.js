@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import ReactPullToRefresh from 'react-pull-to-refresh';
-import Header from '../components/Header';
+import HeaderForecast from '../components/HeaderForecast';
 import Footer from '../components/Footer';
 import CurrentWeatherImage from '../components/CurrentWeatherImage';
 import {Context} from '../Context';
@@ -10,13 +10,6 @@ import {isDaytime, getMidnightTodayUTC, getIconImage} from '../utilities/weather
 export default function Forecast() {
 
   const {currentWeatherData, currentWeatherImageUrl, forecastWeatherData, fetchForecastWeather, fetchWeather} = useContext(Context);
-
-  function handleRefresh(resolve, reject) {
-    console.log('refresh');
-    fetchWeather();
-    resolve();
-    //reject(new Error('Promise failed'));
-  }
 
   const currentTimeUTC = Math.round(new Date().getTime() / 1000);
   const next24HoursForecasts = forecastWeatherData.forecasts.filter( f => f.forecastTimeUTC < currentTimeUTC + 86400);
@@ -113,13 +106,9 @@ export default function Forecast() {
   }
 
   return(
-    <ReactPullToRefresh
-      onRefresh={handleRefresh}
-      style={{
-        textAlign: 'center'
-    }}>
+    <div style={{textAlign: "center"}}>
       <div id="content">
-        <Header currentWeatherData={currentWeatherData} />
+        <HeaderForecast currentWeatherData={currentWeatherData} />
         <CurrentWeatherImage currentWeatherImageUrl={currentWeatherImageUrl} />
         <div className="forecast">
           <ul className="threehour">
@@ -154,7 +143,7 @@ export default function Forecast() {
         </div>
         <Footer />
       </div>
-    </ReactPullToRefresh>
+    </div>
   );
 
 }

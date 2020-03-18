@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function header({currentWeatherData}) {
+export default function Header({currentWeatherData}) {
   return(
     <div className="header">
       <h1>{currentWeatherData.cityName}</h1>

@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState, useCallback} from 'react';
 //import {toast} from 'react-toastify';
-import {weatherApiUrl, weatherApiKey, weatherFetchInterval, genericErrorMessage} from './config.json';
-import {extractCurrentWeatherData, preloadWeatherImages, getWeatherImageUrl, getAllImages} from './utilities/weatherFunctions';
+import {weatherApiUrl, weatherApiKey, weatherApiCurrentUrl, weatherApiForecastUrl, weatherFetchInterval, genericErrorMessage} from './config.json';
+import {extractCurrentWeatherData, extractForecastWeatherData, preloadWeatherImages, getWeatherImageUrl, getAllImages} from './utilities/weatherFunctions';
 import useStateWithLocalStorage from './hooks/useStateWithLocalStorage';
 
 // https://openweathermap.org/weather-conditions
@@ -12,6 +12,8 @@ function ContextProvider({children}) {
 
   const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState({});
   const [currentWeatherData, setCurrentWeatherData] = useState({});
+  const [forecastWeatherDataRaw, setForecastWeatherDataRaw] = useState({});
+  const [forecastWeatherData, setForecastWeatherData] = useState({forecasts: []});
   const [lastWeatherFetchTime, setLastWeatherFetchTime] = useState(0);
   const [currentWeatherImageUrl, setCurrentWeatherImageUrl] = useState("");
   const [totalImagesLoaded, setTotalImagesLoaded] = useState(0);
@@ -19,20 +21,20 @@ function ContextProvider({children}) {
 
 
   // Fetch the current weather
-  const fetchCurrentWeather = useCallback(
+  const fetchWeather = useCallback(
     () => {
 
       // Throttle the weather data fetching
       const currentTime = new Date().getTime();
       if ( currentTime - lastWeatherFetchTime < weatherFetchInterval * 1000 ) {
-        console.log('not fetching - throttled');
+        console.log('not fetching weather - throttled');
         return;
       }
 
       // Get current weather by city
-      console.log('fetching');
-      const requestUrl = `${weatherApiUrl}Robertson,NSW,AU&appid=${weatherApiKey}`;
-      fetch(requestUrl)
+      console.log('fetching current weather');
+      const currentWeatherRequestUrl = `${weatherApiUrl}${weatherApiCurrentUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
+      fetch(currentWeatherRequestUrl)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -40,6 +42,18 @@ function ContextProvider({children}) {
         setLastWeatherFetchTime(new Date().getTime());
       })
       .catch(err => console.log(err));
+
+      // Get forecast weather by city
+      console.log('fetching forecast weather');
+      const forecastWeatherRequestUrl = `${weatherApiUrl}${weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
+      fetch(forecastWeatherRequestUrl)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        setForecastWeatherDataRaw(res);
+        setLastWeatherFetchTime(new Date().getTime());
+      })
+      .catch(err => console.log(err));      
     },
     [lastWeatherFetchTime]
   );
@@ -49,19 +63,25 @@ function ContextProvider({children}) {
   useEffect(
     () => {
       preloadWeatherImages(handleImageLoad);
-      fetchCurrentWeather();
+      fetchWeather();
     },
-    [fetchCurrentWeather]
+    [fetchWeather]
   );
 
 
-  // Extract the raw data and use it to set the current weather data
+  // Extract the current raw data and use it to set the current weather data
   useEffect( () => {
     if ( Object.entries(currentWeatherDataRaw).length > 0 ) {
       setCurrentWeatherData(extractCurrentWeatherData(currentWeatherDataRaw));
     }
   }, [currentWeatherDataRaw]);
   
+  // Extract the forecast raw data and use it to set the forecast weather data
+  useEffect( () => {
+    if ( Object.entries(forecastWeatherDataRaw).length > 0 ) {
+      setForecastWeatherData(extractForecastWeatherData(forecastWeatherDataRaw));
+    }
+  }, [forecastWeatherDataRaw]);
 
   // Pick an image for the current weather
   useEffect( () => {
@@ -89,10 +109,11 @@ function ContextProvider({children}) {
   return(
     <Context.Provider value={{
       currentWeatherData,
-      lastWeatherFetchTime,
       currentWeatherImageUrl,
+      forecastWeatherData,      
+      lastWeatherFetchTime,
       areAllImagesLoaded,
-      fetchCurrentWeather
+      fetchWeather
     }}>
       {children}
     </Context.Provider>

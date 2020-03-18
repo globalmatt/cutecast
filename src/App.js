@@ -1,18 +1,17 @@
 import React, {useContext, useState, useLayoutEffect, useEffect} from 'react';
+import {Switch, Route} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactPullToRefresh from 'react-pull-to-refresh';
 import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 import './PullToRefresh.css';
 import Header from './components/Header';
 import CurrentWeatherImage from './components/CurrentWeatherImage';
 import Footer from './components/Footer';
-import {Context} from './Context';
+import Current from './pages/Current';
+import Forecast from './pages/Forecast';
 
 function App() {
-
-  const {currentWeatherData, currentWeatherImageUrl, fetchCurrentWeather} = useContext(Context);
 
   // https://javascript.info/promise-error-handling
   // (doesn't seem to work - how can we catch the rejected Promise in handleRefresh()?)
@@ -25,29 +24,17 @@ function App() {
     });
   }, []);
 
-
-  // Refresh the weather data 
-  function handleRefresh(resolve, reject) {
-    console.log('refresh');
-    fetchCurrentWeather();
-    resolve();
-    //reject(new Error('Promise failed'));
-  }
-
   return (
     <ErrorBoundary>
       <div className="App">
-        <ReactPullToRefresh
-          onRefresh={handleRefresh}
-          style={{
-            textAlign: 'center'
-        }}>
-          <div id="content">
-            <Header currentWeatherData={currentWeatherData} />
-            <CurrentWeatherImage currentWeatherImageUrl={currentWeatherImageUrl} />
-            <Footer />
-          </div>
-        </ReactPullToRefresh>  
+        <Switch>
+          <Route exact path="/">
+            <Current />
+          </Route>
+          <Route exact path="/forecast">
+            <Forecast />
+          </Route>          
+        </Switch>
       </div>
     </ErrorBoundary>
   );

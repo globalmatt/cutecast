@@ -1,14 +1,15 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Footer() {
 
   return(
-    <div class="footer">
+    <div className="footer">
       <nav>
         <ul>
-          <li><a href="#">Current</a></li>
-          <li><a href="#">Forecast</a></li>
-          <li><a href="#">Settings</a></li>
+          <li><Link to="/">Current</Link></li>
+          <li><Link to="/forecast">Forecast</Link></li>
+          <li><Link to="/settings">Settings</Link></li>
         </ul>
       </nav>
     </div>

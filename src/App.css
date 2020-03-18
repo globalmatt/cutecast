@@ -10,13 +10,13 @@ body, #root {
   height: 100% !important;
 }
 
-.content {
-  position: absolute;
+.header {
+  position: relative;
   z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 150px;
   background: rgba(0,0,0,.6); 
   color: #fff;
   overflow: hidden;
@@ -49,12 +49,12 @@ body, #root {
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   z-index: 2;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 90px;
   background: rgba(0,0,0,.6); 
   color: #fff;
   overflow: hidden;
@@ -75,4 +75,35 @@ body, #root {
 
 .footer nav li a {
   color: #fff;
+}
+
+.forecast {
+  position: absolute;
+  z-index: 2;
+  overflow: auto;
+  width: 100%;
+  height: calc(100% - 240px) !important;
+  background: rgba(255,255,255,.8); 
+}
+
+.forecast ul.threehour {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: scroll; 
+}
+
+.forecast ul.threehour::-webkit-scrollbar {
+  display: none;
+}
+
+.forecast ul.threehour li {
+  display: inline-block;
+  padding: 12px;
+}
+
+.forecast ul.threehour li .time, .forecast ul.threehour li .icon, .forecast ul.threehour li .temp {
+  display: block;
 }

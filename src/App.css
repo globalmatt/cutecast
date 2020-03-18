@@ -1,11 +1,5 @@
 html, body {margin: 0; height: 100%; overflow: hidden}
 
-/*
-body, #root {
-  overflow: hidden;
-}
-*/
-
 #root, .App, .App>div, .refresh-view {
   height: 100% !important;
 }
@@ -83,7 +77,11 @@ body, #root {
   overflow: auto;
   width: 100%;
   height: calc(100% - 240px) !important;
-  background: rgba(255,255,255,.8); 
+  background: rgba(255,255,255,.9); 
+  /* touch-action: pan-down - Prevents the "jerk halfway down the page and not reloading" issue with react-pull-to-refresh: */
+  /* https://github.com/hammerjs/hammer.js/issues/1103 */
+  /* (but breaks being able to scroll weather view back up again - hmm) */
+  touch-action: pan-down; 
 }
 
 .forecast ul.threehour {
@@ -92,7 +90,10 @@ body, #root {
   padding: 0;
   width: 100%;
   white-space: nowrap;
-  overflow: scroll; 
+  overflow: scroll;
+  font-size: 110%;
+  touch-action: pan-x; 
+
 }
 
 .forecast ul.threehour::-webkit-scrollbar {
@@ -101,9 +102,37 @@ body, #root {
 
 .forecast ul.threehour li {
   display: inline-block;
-  padding: 12px;
+  padding: 14px;
 }
 
 .forecast ul.threehour li .time, .forecast ul.threehour li .icon, .forecast ul.threehour li .temp {
   display: block;
+}
+
+.forecast table.daily {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 120%;
+}
+
+.forecast table.daily td.weekday {
+  text-align: left;
+}
+
+.forecast table.daily td.maxTemp, .forecast table.daily td.minTemp {
+  text-align: right;
+}
+
+.forecast .icon {
+  width: 50px;
+  filter: drop-shadow(0 0 1px #000);
+}
+
+/* Prevent scroll bounce when viewed as a PWA on iPhone (works on iOS13) */
+html,
+body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
 }

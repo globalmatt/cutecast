@@ -118,5 +118,5 @@ export function getMidnightTodayUTC() {
 }
 
 export function getIconImage(icon) {
-  return <img src={`${iconsUrl}/${icon}@2x.png`} alt={icon} style={{width: '50px'}} />
+  return <img src={`${iconsUrl}/${icon}@2x.png`} alt={icon} className="icon" />
 }

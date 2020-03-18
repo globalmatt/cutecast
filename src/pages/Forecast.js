@@ -122,26 +122,35 @@ export default function Forecast() {
         <Header currentWeatherData={currentWeatherData} />
         <CurrentWeatherImage currentWeatherImageUrl={currentWeatherImageUrl} />
         <div className="forecast">
-            <ul className="threehour">
-                <li key="now">
-                  <span className="time">Now</span>
-                  <span className="icon">{getIconImage(currentWeatherData.conditionIcon)}</span>
-                  <span className="temp">{Math.round(currentWeatherData.tempC)}&deg;</span>
-                </li>
-            {
-              next24HoursForecasts.map( (f, i) =>
-                <li key={i}>
-                  <span className="time">{getHour(f.forecastTimeUTC)}</span>
-                  <span className="icon">{getIconImage(f.conditionIcon)}</span>
-                  <span className="temp">{Math.round(f.tempC)}&deg;</span>
-                </li>
-              )
-            }
-            </ul>
+          <ul className="threehour">
+              <li key="now">
+                <span className="time">Now</span>
+                <span className="icon">{getIconImage(currentWeatherData.conditionIcon)}</span>
+                <span className="temp">{Math.round(currentWeatherData.tempC)}&deg;</span>
+              </li>
+          {
+            next24HoursForecasts.map( (f, i) =>
+              <li key={i}>
+                <span className="time">{getHour(f.forecastTimeUTC)}</span>
+                <span className="icon">{getIconImage(f.conditionIcon)}</span>
+                <span className="temp">{Math.round(f.tempC)}&deg;</span>
+              </li>
+            )
+          }
+          </ul>
 
-            <ul className="daily">
-              {getDailyForecasts().map( (f, i) => <li key={i}>{f.conditionIcon}</li>)}
-            </ul>
+          <table className="daily">
+            <tbody>
+            {getDailyForecasts().map( (f, i) =>
+            <tr key={i}>
+              <td className="weekday">{f.weekday}</td>
+              <td className="icon">{getIconImage(f.conditionIcon)}</td>
+              <td className="maxTemp">{Math.round(f.maxTempC)}&deg;</td>
+              <td className="minTemp">{Math.round(f.minTempC)}&deg;</td>
+            </tr>
+            )}
+            </tbody>
+          </table>
         </div>
         <Footer />
       </div>
@@ -151,7 +160,8 @@ export default function Forecast() {
 }
 
 // [x] Convert times into human-readable format
-// [ ] Display all 40 forecasts as a plain list for now
-// [ ] Display icons instead of condition IDs
-// [ ] Reformat screen so it's more like iOS Weather app (probably keep current weather header and bg image but fade image)
-
+// [x] Display all 40 forecasts as a plain list for now
+// [x] Display icons instead of condition IDs
+// [x] Reformat screen so it's more like iOS Weather app (probably keep current weather header and bg image but fade image)
+// [ ] Disable the upward vertical pan if the forecast list is scrolled all the way to the top. That way, both PTR and the forecast scrolling should work (in theory!).
+// [ ] Performance improvements when changing screens on iOS

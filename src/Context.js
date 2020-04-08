@@ -4,6 +4,7 @@ import {weatherApiUrl, weatherApiKey, weatherApiCurrentUrl, weatherApiForecastUr
 import {extractCurrentWeatherData, extractForecastWeatherData, preloadWeatherImages, getWeatherImageUrl, getAllImages} from './utilities/weatherFunctions';
 import useStateWithLocalStorage from './hooks/useStateWithLocalStorage';
 
+
 // https://openweathermap.org/weather-conditions
 
 const Context = createContext();
@@ -62,6 +63,7 @@ function ContextProvider({children}) {
   // App boot
   useEffect(
     () => {
+      console.log("App boot");
       preloadWeatherImages(handleImageLoad);
       fetchWeather();
     },
@@ -86,6 +88,7 @@ function ContextProvider({children}) {
   // Pick an image for the current weather
   useEffect( () => {
     if ( Object.entries(currentWeatherData).length > 0 ) {
+      console.log('setCurrentWeatherImageUrl');
       setCurrentWeatherImageUrl(getWeatherImageUrl(currentWeatherData));
     }
   }, [currentWeatherData]);

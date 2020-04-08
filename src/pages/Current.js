@@ -17,6 +17,8 @@ export default function Current() {
     //reject(new Error('Promise failed'));
   }
 
+  console.log("Current rendered");
+
   return(
     <ReactPullToRefresh
       onRefresh={handleRefresh}

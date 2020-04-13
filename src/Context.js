@@ -1,4 +1,5 @@
 import React, {createContext, useEffect, useState, useCallback} from 'react';
+import useMount from './hooks/useMount';
 //import {toast} from 'react-toastify';
 import {weatherApiUrl, weatherApiKey, weatherApiCurrentUrl, weatherApiForecastUrl, weatherFetchInterval, genericErrorMessage} from './config.json';
 import {extractCurrentWeatherData, extractForecastWeatherData, preloadWeatherImages, getWeatherImageUrl, getAllImages} from './utilities/weatherFunctions';
@@ -17,25 +18,33 @@ function ContextProvider({children}) {
   const [forecastWeatherData, setForecastWeatherData] = useState({forecasts: []});
   const [lastWeatherFetchTime, setLastWeatherFetchTime] = useState(0);
   const [currentWeatherImageUrl, setCurrentWeatherImageUrl] = useState("");
+  const [totalWeatherImages, setTotalWeatherImages] = useState(0);
   const [totalImagesLoaded, setTotalImagesLoaded] = useState(0);
   const [areAllImagesLoaded, setAreAllImagesLoaded] = useState(false);
 
+  // App boot
+  useMount( () => {
+    console.log("App boot");
+    const weatherImages = preloadWeatherImages(handleImageLoad);
+    setTotalWeatherImages(weatherImages.length);
+    console.log(weatherImages.length);
+    fetchWeather();
+  });
 
   // Fetch the current weather
-  const fetchWeather = useCallback(
-    () => {
+  function fetchWeather() {
 
-      // Throttle the weather data fetching
-      const currentTime = new Date().getTime();
-      if ( currentTime - lastWeatherFetchTime < weatherFetchInterval * 1000 ) {
-        console.log('not fetching weather - throttled');
-        return;
-      }
+    // Throttle the weather data fetching
+    const currentTime = new Date().getTime();
+    if (currentTime - lastWeatherFetchTime < weatherFetchInterval * 1000) {
+      console.log('not fetching weather - throttled');
+      return;
+    }
 
-      // Get current weather by city
-      console.log('fetching current weather');
-      const currentWeatherRequestUrl = `${weatherApiUrl}${weatherApiCurrentUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
-      fetch(currentWeatherRequestUrl)
+    // Get current weather by city
+    console.log('fetching current weather');
+    const currentWeatherRequestUrl = `${weatherApiUrl}${weatherApiCurrentUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
+    fetch(currentWeatherRequestUrl)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -44,32 +53,18 @@ function ContextProvider({children}) {
       })
       .catch(err => console.log(err));
 
-      // Get forecast weather by city
-      console.log('fetching forecast weather');
-      const forecastWeatherRequestUrl = `${weatherApiUrl}${weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
-      fetch(forecastWeatherRequestUrl)
+    // Get forecast weather by city
+    console.log('fetching forecast weather');
+    const forecastWeatherRequestUrl = `${weatherApiUrl}${weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
+    fetch(forecastWeatherRequestUrl)
       .then(res => res.json())
       .then(res => {
         console.log(res)
         setForecastWeatherDataRaw(res);
         setLastWeatherFetchTime(new Date().getTime());
       })
-      .catch(err => console.log(err));      
-    },
-    [lastWeatherFetchTime]
-  );
-
-
-  // App boot
-  useEffect(
-    () => {
-      console.log("App boot");
-      preloadWeatherImages(handleImageLoad);
-      fetchWeather();
-    },
-    [fetchWeather]
-  );
-
+      .catch(err => console.log(err));
+  }
 
   // Extract the current raw data and use it to set the current weather data
   useEffect( () => {
@@ -93,7 +88,6 @@ function ContextProvider({children}) {
     }
   }, [currentWeatherData]);
 
-
   // Set the areAllImagesLoaded state variable to true once all images have preloaded
   useEffect( () => {
     if ( totalImagesLoaded >= getAllImages().length && totalImagesLoaded > 0 ) {
@@ -101,7 +95,6 @@ function ContextProvider({children}) {
         console.log("All images preloaded");
     }
   }, [totalImagesLoaded]);
-
 
   // Record a successfully-loaded image
   function handleImageLoad() {
@@ -115,6 +108,8 @@ function ContextProvider({children}) {
       currentWeatherImageUrl,
       forecastWeatherData,      
       lastWeatherFetchTime,
+      totalWeatherImages,
+      totalImagesLoaded,
       areAllImagesLoaded,
       fetchWeather
     }}>

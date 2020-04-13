@@ -7,7 +7,7 @@ import {Context} from '../Context';
 
 export default function Current() {
 
-  const {currentWeatherData, currentWeatherImageUrl, fetchWeather} = useContext(Context);
+  const {currentWeatherData, currentWeatherImageUrl, fetchWeather, totalImagesLoaded} = useContext(Context);
 
   // Refresh the weather data 
   function handleRefresh(resolve, reject) {
@@ -18,6 +18,8 @@ export default function Current() {
   }
 
   console.log("Current rendered");
+  console.log('totalImagesLoaded:', totalImagesLoaded);
+
 
   return(
     <ReactPullToRefresh

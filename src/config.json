@@ -6,5 +6,7 @@
   "weatherFetchInterval": "6",
   "imagesUrl": "/images",
   "iconsUrl": "/images/icons",
-  "genericErrorMessage": "Sorry, something went wrong. Please try again."
+  "genericErrorMessage": "Sorry, something went wrong. Please try again.",
+  "progressBarWidth": 100,
+  "loadingMessage": "Loading Images"
 }

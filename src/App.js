@@ -5,13 +5,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 import './PullToRefresh.css';
+import {progressBarWidth, loadingMessage} from './config.json';
 import Header from './components/Header';
 import CurrentWeatherImage from './components/CurrentWeatherImage';
 import Footer from './components/Footer';
 import Current from './pages/Current';
 import Forecast from './pages/Forecast';
+import Overlay from './components/Overlay';
+import ProgressBar from './components/ProgressBar';
+import {Context} from './Context';
 
 function App() {
+
+  const {totalWeatherImages, totalImagesLoaded, areAllImagesLoaded} = useContext(Context);
 
   // https://javascript.info/promise-error-handling
   // (doesn't seem to work - how can we catch the rejected Promise in handleRefresh()?)
@@ -27,6 +33,10 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="App">
+        <Overlay visible={ !areAllImagesLoaded }>
+          <ProgressBar current={totalImagesLoaded} total={totalWeatherImages} barWidth={progressBarWidth} />
+          <div>{loadingMessage}</div>
+        </Overlay>        
         <Switch>
           <Route exact path="/">
             <Current />

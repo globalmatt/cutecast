@@ -48,7 +48,7 @@ export function extractForecastWeatherData(rawData) {
 }
 
 
-// Preload the weather images in the browser
+// Preload the weather images in the browser. Also returns the weather image data.
 export function preloadWeatherImages(imageLoadHandler) {
   console.log('preloadWeatherImages');
   weatherImages.forEach( img => {
@@ -56,6 +56,7 @@ export function preloadWeatherImages(imageLoadHandler) {
     i.src = imagesUrl + '/' + img.url;
     i.addEventListener('load', imageLoadHandler);
   });
+  return weatherImages;
 }
 
 // Get a random suitable image to represent the current weather

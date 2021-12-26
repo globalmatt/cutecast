@@ -1,181 +1,193 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
-
-#root, .App, .App>div, .refresh-view {
-  height: 100% !important;
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
 }
 
-.header, .header-forecast {
-  position: relative;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  background: rgba(0,0,0,.6); 
-  color: #fff;
-  overflow: hidden;
-  padding: 10px;
-  box-sizing: border-box;
+#root,
+.App,
+.App > div,
+.refresh-view {
+    height: 100% !important;
+}
+
+.header,
+.header-forecast {
+    position: relative;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .header-forecast {
-  height: 50px;
+    height: 50px;
 }
 
 .header-forecast h1 {
-  font-size: 110%;
-  margin-top: 4px;
+    font-size: 110%;
+    margin-top: 4px;
 }
 
 .weatherImage {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
 }
 
 .weatherImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background: red;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: red;
 }
 
 .footer {
-  position: fixed;
-  z-index: 2;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 90px;
-  background: rgba(0,0,0,.6); 
-  color: #fff;
-  overflow: hidden;
-  padding: 20px 10px 40px 10px;
-  box-sizing: border-box;  
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    overflow: hidden;
+    padding: 20px 10px 40px 10px;
+    box-sizing: border-box;
 }
 
 .footer nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .footer nav li {
-  display: inline-block;
-  padding: 5px;
+    display: inline-block;
+    padding: 5px;
 }
 
 .footer nav li a {
-  color: #fff;
+    color: #fff;
 }
 
 .forecast {
-  position: absolute;
-  z-index: 2;
-  overflow: auto;
-  width: 100%;
-  height: calc(100% - 140px) !important;
-  background: rgba(255,255,255,.9);
+    position: absolute;
+    z-index: 2;
+    overflow: auto;
+    width: 100%;
+    height: calc(100% - 140px) !important;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .forecast ul.threehour {
-  list-style: none;
-  margin: 20px 0;
-  padding: 0;
-  width: 100%;
-  white-space: nowrap;
-  overflow: scroll;
-  font-size: 110%;
-  touch-action: pan-x; 
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: scroll;
+    font-size: 110%;
+    touch-action: pan-x;
 }
 
 .forecast ul.threehour::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .forecast ul.threehour li {
-  display: inline-block;
-  padding: 14px;
+    display: inline-block;
+    padding: 14px;
 }
 
-.forecast ul.threehour li .time, .forecast ul.threehour li .icon, .forecast ul.threehour li .temp {
-  display: block;
+.forecast ul.threehour li .time,
+.forecast ul.threehour li .icon,
+.forecast ul.threehour li .temp {
+    display: block;
 }
 
 .forecast table.daily {
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  font-size: 120%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 120%;
 }
 
 .forecast table.daily td.weekday {
-  text-align: left;
+    text-align: left;
 }
 
-.forecast table.daily td.maxTemp, .forecast table.daily td.minTemp {
-  text-align: right;
+.forecast table.daily td.maxTemp,
+.forecast table.daily td.minTemp {
+    text-align: right;
 }
 
 .forecast .icon {
-  width: 50px;
-  filter: drop-shadow(0 0 1px #000);
+    width: 50px;
+    filter: drop-shadow(0 0 1px #000);
 }
 
 .overlay {
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  background: #efefef;
-  display: table;
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0s;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: #efefef;
+    display: table;
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
 }
 
 .overlay .content {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .overlay.hidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 .progressBar {
-  display: block;
-  margin: 0 auto;
-  width: 100px;
-  height: 20px;
-  border: 2px solid #666;
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 20px;
+    border: 2px solid #666;
 }
 
 .progressBar .fill {
-  display: block;
-  width: 0;
-  height: 20px;
-  background: #666;
+    display: block;
+    width: 0;
+    height: 20px;
+    background: #666;
 }
 
 /* Prevent scroll bounce when viewed as a PWA on iPhone (works on iOS13) */
 html,
 body {
-  position: fixed;
-  overflow: hidden;
-  width: 100%;
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
 }

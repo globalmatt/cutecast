@@ -1,32 +1,32 @@
 [
-  {
-    "url": "ellieNiceDayUnicorn.jpg",
-    "conditionCodes": [800, 801],
-    "daytime": true
-  },
-  {
-    "url": "sunflowers.jpg",
-    "conditionCodes": [800, 801],
-    "daytime": true
-  },
-  {
-    "url": "scatteredClouds.jpg",
-    "conditionCodes": [802],
-    "daytime": true
-  },
-  {
-    "url": "scatteredCloudsNight.jpg",
-    "conditionCodes": [802, 804],
-    "daytime": false
-  },  
-  {
-    "url": "brokenClouds.jpg",
-    "conditionCodes": [803],
-    "daytime": true
-  },   
-  {
-    "url": "overcastClouds.jpg",
-    "conditionCodes": [804],
-    "daytime": true
-  }  
+    {
+        "url": "ellieNiceDayUnicorn.jpg",
+        "conditionCodes": [800, 801],
+        "daytime": true
+    },
+    {
+        "url": "sunflowers.jpg",
+        "conditionCodes": [800, 801],
+        "daytime": true
+    },
+    {
+        "url": "scatteredClouds.jpg",
+        "conditionCodes": [802],
+        "daytime": true
+    },
+    {
+        "url": "scatteredCloudsNight.jpg",
+        "conditionCodes": [802, 804],
+        "daytime": false
+    },
+    {
+        "url": "brokenClouds.jpg",
+        "conditionCodes": [803],
+        "daytime": true
+    },
+    {
+        "url": "overcastClouds.jpg",
+        "conditionCodes": [804],
+        "daytime": true
+    }
 ]

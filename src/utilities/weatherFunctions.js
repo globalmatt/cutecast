@@ -1,4 +1,7 @@
+// Vendors
 import React from "react";
+
+// Config
 import conditionCodes from "../conditionCodes.json";
 import weatherImages from "../weatherImages.json";
 import { imagesUrl, iconsUrl } from "../config.json";

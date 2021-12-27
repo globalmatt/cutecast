@@ -1,5 +1,15 @@
+// Vendors
 import React from "react";
+import PropTypes from "prop-types";
 
+/**
+ * The header for the "Current Weather" page.
+ *
+ * Renders the "Current Weather" page header, including the city name
+ * and current condition/temperature.
+ *
+ * @returns {ReactElement} The `<Header />` component.
+ */
 export default function Header({ currentWeatherData }) {
     return (
         <div className="header">
@@ -11,3 +21,12 @@ export default function Header({ currentWeatherData }) {
         </div>
     );
 }
+
+Header.propTypes = {
+    /** The current weather data. */
+    currentWeatherData: PropTypes.shape({
+        cityName: PropTypes.string,
+        conditionName: PropTypes.string,
+        tempC: PropTypes.number,
+    }),
+};

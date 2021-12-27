@@ -1,6 +1,11 @@
-import React, { createContext, useEffect, useState, useCallback } from "react";
+// Vendors
+import React, { createContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
+// Hooks
 import useMount from "./hooks/useMount";
-//import {toast} from 'react-toastify';
+
+// Config
 import {
     weatherApiUrl,
     weatherApiKey,
@@ -9,6 +14,8 @@ import {
     weatherFetchInterval,
     genericErrorMessage,
 } from "./config.json";
+
+// Helper functions
 import {
     extractCurrentWeatherData,
     extractForecastWeatherData,
@@ -16,12 +23,20 @@ import {
     getWeatherImageUrl,
     getAllImages,
 } from "./utilities/weatherFunctions";
-import useStateWithLocalStorage from "./hooks/useStateWithLocalStorage";
-
-// https://openweathermap.org/weather-conditions
 
 const Context = createContext();
 
+/**
+ * Renders the supplied content (app) wrapped inside a
+ * `<Context.Provider />` component. The provider includes all the state
+ * variables and functions needed for the app's context.
+ *
+ * @param {*} children - The content to render inside the
+ * `<Context.Provider />` component.
+ *
+ * @returns {ReactElement} The content wrapped inside the
+ * `<Context.Provider />` component.
+ */
 function ContextProvider({ children }) {
     const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState({});
     const [currentWeatherData, setCurrentWeatherData] = useState({});
@@ -140,5 +155,11 @@ function ContextProvider({ children }) {
         </Context.Provider>
     );
 }
+
+ContextProvider.propTypes = {
+    /** The child elements to display inside the `<Context.Provider />`
+     * component (typically this will be the entire app). */
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+};
 
 export { Context, ContextProvider };

@@ -1,7 +1,17 @@
+// Vendors
 import React from "react";
+import PropTypes from "prop-types";
 
-// https://stackoverflow.com/questions/31111771/can-you-catch-all-errors-of-a-react-js-app-with-a-try-catch-block
-
+/**
+ * An error boundary component.
+ *
+ * A wrapper component to catch React lifecycle errors gracefully.
+ *
+ * @see
+ * https://stackoverflow.com/questions/31111771/can-you-catch-all-errors-of-a-react-js-app-with-a-try-catch-block
+ *
+ * @returns {ReactElement} The `<ErrorBoundary />` component.
+ */
 class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
@@ -24,5 +34,11 @@ class ErrorBoundary extends React.Component {
         return this.props.children;
     }
 }
+
+ErrorBoundary.propTypes = {
+    /** The child elements to display inside the component (typically
+     * this will be the entire app). */
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+};
 
 export default ErrorBoundary;

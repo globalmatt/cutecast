@@ -1,6 +1,14 @@
+// Vendors
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * The app footer.
+ *
+ * Renders the app-wide footer bar, including navigation buttons.
+ *
+ * @returns {ReactElement} The `<Footer />` component.
+ */
 export default function Footer() {
     return (
         <div className="footer">
@@ -20,3 +28,5 @@ export default function Footer() {
         </div>
     );
 }
+
+Footer.propTypes = {};

@@ -1,15 +1,28 @@
+// Vendors
 import React, { useContext } from "react";
 import ReactPullToRefresh from "react-pull-to-refresh";
+
+// Components
 import HeaderForecast from "../components/HeaderForecast";
 import Footer from "../components/Footer";
 import CurrentWeatherImage from "../components/CurrentWeatherImage";
 import { Context } from "../Context";
+
+// Helper functions
 import {
     isDaytime,
     getMidnightTodayUTC,
     getIconImage,
 } from "../utilities/weatherFunctions";
 
+/**
+ * The Forecast page.
+ *
+ * Renders the Forecast page, comprising the header, weather forecast,
+ * and footer.
+ *
+ * @returns {ReactElement} The `<Current />` component.
+ */
 export default function Forecast() {
     const {
         currentWeatherData,
@@ -183,10 +196,3 @@ export default function Forecast() {
         </div>
     );
 }
-
-// [x] Convert times into human-readable format
-// [x] Display all 40 forecasts as a plain list for now
-// [x] Display icons instead of condition IDs
-// [x] Reformat screen so it's more like iOS Weather app (probably keep current weather header and bg image but fade image)
-// [ ] Disable the upward vertical pan if the forecast list is scrolled all the way to the top. That way, both PTR and the forecast scrolling should work (in theory!).
-// [ ] Performance improvements when changing screens on iOS

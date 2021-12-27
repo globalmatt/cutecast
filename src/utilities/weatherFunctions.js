@@ -96,21 +96,6 @@ export function getWeatherImageUrl(currentWeatherData) {
     }
 }
 
-function kelvinsToCelsius(t) {
-    return t - 272.15;
-    //return t - 272;
-}
-
-/*
-function kelvinsToFahrenheit(t) {
-  return t * 9 / 5 - 459.67;
-}
-
-function utcToCurrentTime(timeUTC, timezone) {
-  return timeUTC + timezone;
-}
-*/
-
 // Get condition name from code
 function getConditionName(
     conditionCode,

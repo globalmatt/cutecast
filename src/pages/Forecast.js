@@ -1,6 +1,5 @@
 // Vendors
 import React, { useContext } from "react";
-import ReactPullToRefresh from "react-pull-to-refresh";
 
 // Components
 import HeaderForecast from "../components/HeaderForecast";
@@ -24,13 +23,8 @@ import {
  * @returns {ReactElement} The `<Current />` component.
  */
 export default function Forecast() {
-    const {
-        currentWeatherData,
-        currentWeatherImageUrl,
-        forecastWeatherData,
-        fetchForecastWeather,
-        fetchWeather,
-    } = useContext(Context);
+    const { currentWeatherData, currentWeatherImageUrl, forecastWeatherData } =
+        useContext(Context);
 
     const currentTimeUTC = Math.round(new Date().getTime() / 1000);
     const next24HoursForecasts = forecastWeatherData.forecasts.filter(

@@ -12,7 +12,6 @@ import {
     weatherApiCurrentUrl,
     weatherApiForecastUrl,
     weatherFetchInterval,
-    genericErrorMessage,
 } from "./config.json";
 
 // Helper functions

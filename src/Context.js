@@ -8,7 +8,6 @@ import useMount from "./hooks/useMount";
 // Config
 import {
     weatherApiUrl,
-    weatherApiKey,
     weatherApiCurrentUrl,
     weatherApiForecastUrl,
     weatherFetchInterval,
@@ -22,6 +21,8 @@ import {
     getWeatherImageUrl,
     getAllImages,
 } from "./utilities/weatherFunctions";
+
+const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 const Context = createContext();
 

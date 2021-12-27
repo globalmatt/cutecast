@@ -1,6 +1,5 @@
 {
     "weatherApiUrl": "https://api.openweathermap.org/data/2.5/",
-    "weatherApiKey": "ce68b8712ca3a2b635771766ee04aebb",
     "weatherApiCurrentUrl": "weather?q=",
     "weatherApiForecastUrl": "forecast?q=",
     "weatherFetchInterval": "6",

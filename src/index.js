@@ -1,17 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ToastContainer } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { ContextProvider } from "./Context";
 import * as serviceWorker from "./serviceWorker";
+import addFatalErrorHandler from "./utilities/addFatalErrorHandler";
+
+addFatalErrorHandler();
 
 ReactDOM.render(
-    <ContextProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ContextProvider>,
+    <div>
+        <ContextProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ContextProvider>
+        <ToastContainer limit={1} />
+    </div>,
     document.getElementById("root")
 );
 

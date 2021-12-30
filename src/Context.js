@@ -64,7 +64,7 @@ function ContextProvider({ children }) {
         // Throttle the weather data fetching
         const currentTime = new Date().getTime();
         if (currentTime - lastWeatherFetchTime < weatherFetchInterval * 1000) {
-            console.log("not fetching weather - throttled");
+            console.warn("not fetching weather - throttled");
             return;
         }
 
@@ -72,25 +72,35 @@ function ContextProvider({ children }) {
         console.log("fetching current weather");
         const currentWeatherRequestUrl = `${weatherApiUrl}${weatherApiCurrentUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
         fetch(currentWeatherRequestUrl)
-            .then((res) => res.json())
             .then((res) => {
-                console.log(res);
-                setCurrentWeatherDataRaw(res);
-                setLastWeatherFetchTime(new Date().getTime());
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw Error(res.status);
+                }
             })
-            .catch((err) => console.log(err));
+            .then((json) => {
+                console.log(json);
+                setCurrentWeatherDataRaw(json);
+                setLastWeatherFetchTime(new Date().getTime());
+            });
 
         // Get forecast weather by city
         console.log("fetching forecast weather");
         const forecastWeatherRequestUrl = `${weatherApiUrl}${weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
         fetch(forecastWeatherRequestUrl)
-            .then((res) => res.json())
             .then((res) => {
-                console.log(res);
-                setForecastWeatherDataRaw(res);
-                setLastWeatherFetchTime(new Date().getTime());
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw Error(res.status);
+                }
             })
-            .catch((err) => console.log(err));
+            .then((json) => {
+                console.log(json);
+                setForecastWeatherDataRaw(json);
+                setLastWeatherFetchTime(new Date().getTime());
+            });
     }
 
     // Extract the current raw data and use it to set the current weather data

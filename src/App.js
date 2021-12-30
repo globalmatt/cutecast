@@ -1,6 +1,5 @@
-import React, { useContext, useState, useLayoutEffect, useEffect } from "react";
+import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
@@ -15,17 +14,6 @@ import { Context } from "./Context";
 function App() {
     const { totalWeatherImages, totalImagesLoaded, areAllImagesLoaded } =
         useContext(Context);
-
-    // https://javascript.info/promise-error-handling
-    // (doesn't seem to work - how can we catch the rejected Promise in handleRefresh()?)
-    useEffect(() => {
-        window.addEventListener("unhandledrejection", function (event) {
-            // the event object has two special properties:
-            console.log("caught rejection");
-            toast("Oops, something went wrong! Please try again."); // [object Promise] - the promise that generated the error
-            //alert(event.reason); // Error: Whoops! - the unhandled error object
-        });
-    }, []);
 
     return (
         <ErrorBoundary>

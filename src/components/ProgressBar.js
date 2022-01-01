@@ -19,7 +19,11 @@ function ProgressBar({ current, total, barWidth }) {
     }
 
     return (
-        <div className="progressBar">
+        <div
+            className="progressBar"
+            role="progressbar"
+            aria-label="Progress Bar"
+        >
             <div className="fill" style={{ width: progressBarWidth() }}></div>
         </div>
     );

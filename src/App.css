@@ -6,10 +6,12 @@ body {
 }
 
 #root,
+.appContainer,
 .App,
 .App > div,
 .refresh-view {
     height: 100% !important;
+    text-align: center;
 }
 
 .header,

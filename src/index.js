@@ -1,17 +1,24 @@
+// Vendors
 import React from "react";
 import ReactDOM from "react-dom";
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+
+// Components
 import App from "./App";
 import { ContextProvider } from "./Context";
-import * as serviceWorker from "./serviceWorker";
+
+// Helper functions
 import addFatalErrorHandler from "./utilities/addFatalErrorHandler";
+import * as serviceWorker from "./serviceWorker";
+
+// Stylesheets
+import "./index.css";
 
 addFatalErrorHandler();
 
 ReactDOM.render(
-    <div>
+    <div className="appContainer">
         <ContextProvider>
             <BrowserRouter>
                 <App />

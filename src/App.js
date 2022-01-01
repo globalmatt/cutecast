@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
 import "./PullToRefresh.css";
-import { progressBarWidth, loadingMessage } from "./config.json";
+import config from "./config.json";
 import Current from "./pages/Current";
 import Forecast from "./pages/Forecast";
 import Overlay from "./components/Overlay";
@@ -22,9 +22,9 @@ function App() {
                     <ProgressBar
                         current={totalImagesLoaded}
                         total={totalWeatherImages}
-                        barWidth={progressBarWidth}
+                        barWidth={config.progressBarWidth}
                     />
-                    <div>{loadingMessage}</div>
+                    <div>{config.loadingMessage}</div>
                 </Overlay>
                 <Switch>
                     <Route exact path="/">

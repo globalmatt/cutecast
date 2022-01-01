@@ -1,6 +1,6 @@
 // Vendors
 import React, { useContext } from "react";
-import ReactPullToRefresh from "react-pull-to-refresh";
+import PullToRefresh from "react-simple-pull-to-refresh";
 
 //Components
 import Header from "../components/Header";
@@ -17,31 +17,11 @@ import { Context } from "../Context";
  * @returns {ReactElement} The `<Current />` component.
  */
 export default function Current() {
-    const {
-        currentWeatherData,
-        currentWeatherImageUrl,
-        fetchWeather,
-        totalImagesLoaded,
-    } = useContext(Context);
-
-    // Refresh the weather data
-    function handleRefresh(resolve, reject) {
-        console.log("refresh");
-        fetchWeather();
-        resolve();
-        //reject(new Error('Promise failed'));
-    }
-
-    console.log("Current rendered");
-    console.log("totalImagesLoaded:", totalImagesLoaded);
+    const { currentWeatherData, currentWeatherImageUrl, fetchWeather } =
+        useContext(Context);
 
     return (
-        <ReactPullToRefresh
-            onRefresh={handleRefresh}
-            style={{
-                textAlign: "center",
-            }}
-        >
+        <PullToRefresh onRefresh={fetchWeather} className="refresh-view">
             <div id="content">
                 <Header currentWeatherData={currentWeatherData} />
                 <CurrentWeatherImage
@@ -49,6 +29,6 @@ export default function Current() {
                 />
                 <Footer />
             </div>
-        </ReactPullToRefresh>
+        </PullToRefresh>
     );
 }

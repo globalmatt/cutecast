@@ -4,7 +4,7 @@ import React from "react";
 // Config
 import conditionCodes from "../conditionCodes.json";
 import weatherImages from "../weatherImages.json";
-import { imagesUrl, iconsUrl } from "../config.json";
+import config from "../config.json";
 
 // Return an array of all the image objects
 export function getAllImages() {
@@ -61,10 +61,9 @@ export function extractForecastWeatherData(rawData) {
 
 // Preload the weather images in the browser. Also returns the weather image data.
 export function preloadWeatherImages(imageLoadHandler) {
-    console.log("preloadWeatherImages");
     weatherImages.forEach((img) => {
         const i = new Image();
-        i.src = imagesUrl + "/" + img.url;
+        i.src = config.imagesUrl + "/" + img.url;
         i.addEventListener("load", imageLoadHandler);
     });
     return weatherImages;
@@ -82,11 +81,11 @@ export function getWeatherImageUrl(currentWeatherData) {
                     currentWeatherData.sunsetUTC
                 )
     );
-    console.log(suitableImages);
+    //console.log(suitableImages);
 
     if (suitableImages.length > 0) {
         return (
-            imagesUrl +
+            config.imagesUrl +
             "/" +
             suitableImages[Math.floor(Math.random() * suitableImages.length)]
                 .url
@@ -150,6 +149,10 @@ export function getMidnightTodayUTC() {
 
 export function getIconImage(icon) {
     return (
-        <img src={`${iconsUrl}/${icon}@2x.png`} alt={icon} className="icon" />
+        <img
+            src={`${config.iconsUrl}/${icon}@2x.png`}
+            alt={icon}
+            className="icon"
+        />
     );
 }

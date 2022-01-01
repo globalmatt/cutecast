@@ -6,12 +6,7 @@ import PropTypes from "prop-types";
 import useMount from "./hooks/useMount";
 
 // Config
-import {
-    weatherApiUrl,
-    weatherApiCurrentUrl,
-    weatherApiForecastUrl,
-    weatherFetchInterval,
-} from "./config.json";
+import config from "./config.json";
 
 // Helper functions
 import {
@@ -52,55 +47,44 @@ function ContextProvider({ children }) {
 
     // App boot
     useMount(() => {
-        console.log("App boot");
         const weatherImages = preloadWeatherImages(handleImageLoad);
         setTotalWeatherImages(weatherImages.length);
-        console.log(weatherImages.length);
         fetchWeather();
     });
 
     // Fetch the current weather
-    function fetchWeather() {
+    async function fetchWeather() {
         // Throttle the weather data fetching
         const currentTime = new Date().getTime();
-        if (currentTime - lastWeatherFetchTime < weatherFetchInterval * 1000) {
+        if (
+            currentTime - lastWeatherFetchTime <
+            config.weatherFetchInterval * 1000
+        ) {
             console.warn("not fetching weather - throttled");
             return;
         }
 
         // Get current weather by city
-        console.log("fetching current weather");
-        const currentWeatherRequestUrl = `${weatherApiUrl}${weatherApiCurrentUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
-        fetch(currentWeatherRequestUrl)
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw Error(res.status);
-                }
-            })
-            .then((json) => {
-                console.log(json);
-                setCurrentWeatherDataRaw(json);
-                setLastWeatherFetchTime(new Date().getTime());
-            });
+        const currentWeatherRequestUrl = `${config.weatherApiUrl}${config.weatherApiCurrentUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
+        const currentWeather = await fetch(currentWeatherRequestUrl);
+
+        if (!currentWeather.ok) {
+            throw Error(currentWeather.status);
+        }
+
+        setCurrentWeatherDataRaw(await currentWeather.json());
+        setLastWeatherFetchTime(new Date().getTime());
 
         // Get forecast weather by city
-        console.log("fetching forecast weather");
-        const forecastWeatherRequestUrl = `${weatherApiUrl}${weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
-        fetch(forecastWeatherRequestUrl)
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw Error(res.status);
-                }
-            })
-            .then((json) => {
-                console.log(json);
-                setForecastWeatherDataRaw(json);
-                setLastWeatherFetchTime(new Date().getTime());
-            });
+        const forecastWeatherRequestUrl = `${config.weatherApiUrl}${config.weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
+        const forecastWeather = await fetch(forecastWeatherRequestUrl);
+
+        if (!forecastWeather.ok) {
+            throw Error(forecastWeather.status);
+        }
+
+        setForecastWeatherDataRaw(await forecastWeather.json());
+        setLastWeatherFetchTime(new Date().getTime());
     }
 
     // Extract the current raw data and use it to set the current weather data
@@ -136,7 +120,6 @@ function ContextProvider({ children }) {
             totalImagesLoaded > 0
         ) {
             setAreAllImagesLoaded(true);
-            console.log("All images preloaded");
         }
     }, [totalImagesLoaded]);
 

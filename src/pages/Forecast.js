@@ -8,11 +8,9 @@ import CurrentWeatherImage from "../components/CurrentWeatherImage";
 import { Context } from "../Context";
 
 // Helper functions
-import {
-    isDaytime,
-    getMidnightTodayUTC,
-    getIconImage,
-} from "../utilities/weatherFunctions";
+import getIconImage from "../utilities/getIconImage";
+import getMidnightTodayUTC from "../utilities/getMidnightTodayUTC";
+import isDaytime from "../utilities/isDaytime";
 
 /**
  * The Forecast page.

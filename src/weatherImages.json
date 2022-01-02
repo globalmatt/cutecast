@@ -1,5 +1,10 @@
 [
     {
+        "url": "rain.jpg",
+        "conditionCodes": [500, 501],
+        "daytime": true
+    },
+    {
         "url": "ellieNiceDayUnicorn.jpg",
         "conditionCodes": [800, 801],
         "daytime": true
@@ -23,6 +28,11 @@
         "url": "brokenClouds.jpg",
         "conditionCodes": [803],
         "daytime": true
+    },
+    {
+        "url": "brokenCloudsNight.jpg",
+        "conditionCodes": [803],
+        "daytime": false
     },
     {
         "url": "overcastClouds.jpg",

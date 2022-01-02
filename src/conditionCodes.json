@@ -9,6 +9,8 @@
     "230": "Thunderstorms and light drizzle",
     "231": "Thunderstorms and drizzle",
     "232": "Thunderstorms and heavy drizzle",
+    "500": "Light rain",
+    "501": "Rain",
     "800": {
         "day": "Sunny",
         "night": "Clear"

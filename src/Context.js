@@ -7,15 +7,13 @@ import useMount from "./hooks/useMount";
 
 // Config
 import config from "./config.json";
+import weatherImages from "./weatherImages.json";
 
 // Helper functions
-import {
-    extractCurrentWeatherData,
-    extractForecastWeatherData,
-    preloadWeatherImages,
-    getWeatherImageUrl,
-    getAllImages,
-} from "./utilities/weatherFunctions";
+import extractCurrentWeatherData from "./utilities/extractCurrentWeatherData";
+import extractForecastWeatherData from "./utilities/extractForecastWeatherData";
+import preloadWeatherImages from "./utilities/preloadWeatherImages";
+import getWeatherImageUrl from "./utilities/getWeatherImageUrl";
 
 const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -108,7 +106,6 @@ function ContextProvider({ children }) {
     // Pick an image for the current weather
     useEffect(() => {
         if (Object.entries(currentWeatherData).length > 0) {
-            console.log("setCurrentWeatherImageUrl");
             setCurrentWeatherImageUrl(getWeatherImageUrl(currentWeatherData));
         }
     }, [currentWeatherData]);
@@ -116,7 +113,7 @@ function ContextProvider({ children }) {
     // Set the areAllImagesLoaded state variable to true once all images have preloaded
     useEffect(() => {
         if (
-            totalImagesLoaded >= getAllImages().length &&
+            totalImagesLoaded >= weatherImages.length &&
             totalImagesLoaded > 0
         ) {
             setAreAllImagesLoaded(true);

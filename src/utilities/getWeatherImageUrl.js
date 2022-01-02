@@ -2,8 +2,18 @@ import config from "../config.json";
 import weatherImages from "../weatherImages.json";
 import isDaytime from "./isDaytime";
 
-// Get a random suitable image to represent the current weather
+//
 
+/**
+ * Get a random suitable image to represent the current weather.
+ *
+ * Usually this will pretty much match the condition name returned by
+ * the OpenWeather API. The main (only?) exception is that the "Clear"
+ * (800) condition's name is "Sunny" during daylight hours.
+ *
+ * @param {Object} currentWeatherData - The current weather data.
+ * @returns {String} The URL of the selected weather image.
+ */
 export default function getWeatherImageUrl(currentWeatherData) {
     const suitableImages = weatherImages.filter(
         (i) =>
@@ -15,7 +25,7 @@ export default function getWeatherImageUrl(currentWeatherData) {
                     currentWeatherData.sunsetUTC
                 )
     );
-    //console.log(suitableImages);
+
     if (suitableImages.length > 0) {
         return (
             config.imagesUrl +

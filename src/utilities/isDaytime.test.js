@@ -10,10 +10,22 @@ test("Returns true if during daytime today", () => {
     ).toBe(true);
 });
 
-test("Returns true if during daytime tomorrow", () => {
+test("Returns true if during daytime today", () => {
     expect(
         isDaytime(
             10, // timeUTC
+            1, // todaySunriseUTC,
+            43200, // todaySunsetUTC
+            86400 + 1, // tomorrowSunriseUTC,
+            86400 + 43200 // tomorrowSunsetUTC
+        )
+    ).toBe(true);
+});
+
+test("Returns true if during daytime tomorrow", () => {
+    expect(
+        isDaytime(
+            86400 + 2, // timeUTC
             1, // todaySunriseUTC,
             43200, // todaySunsetUTC
             86400 + 1, // tomorrowSunriseUTC,

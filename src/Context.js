@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import useMount from "./hooks/useMount";
 
 // Config
-import config from "./config.json";
 import weatherImages from "./weatherImages.json";
 
 // Helper functions
@@ -51,12 +50,14 @@ function ContextProvider({ children }) {
 
     // Fetch the latest weather data
     async function fetchWeather() {
-        const [current, forecast] = await fetchWeatherData(
-            lastWeatherFetchTime
-        );
-        setCurrentWeatherDataRaw(current);
-        setForecastWeatherDataRaw(forecast);
-        setLastWeatherFetchTime(new Date().getTime());
+        const res = await fetchWeatherData(lastWeatherFetchTime);
+        if (res) {
+            setCurrentWeatherDataRaw(res[0]);
+            setForecastWeatherDataRaw(res[1]);
+            setLastWeatherFetchTime(new Date().getTime());
+        } else {
+            console.log("throttled");
+        }
     }
 
     // Extract the current raw data and use it to set the current weather data
@@ -91,6 +92,7 @@ function ContextProvider({ children }) {
             totalImagesLoaded > 0
         ) {
             setAreAllImagesLoaded(true);
+            console.log("setAreAllImagesLoaded");
         }
     }, [totalImagesLoaded]);
 

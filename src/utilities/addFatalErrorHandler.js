@@ -1,4 +1,11 @@
-export default () => {
+/**
+ * Add an error handler that captures any fatal errors from the app and
+ * displays a friendly error screen.
+ *
+ * Listens to the `error` and `unhandledrejection` events on the
+ * `window` object.
+ */
+export default function addFatalErrorHandler() {
     let errorListener = null;
     let unhandledrejectionListener = null;
 
@@ -19,7 +26,7 @@ export default () => {
             showErrorPage();
         }
     );
-};
+}
 
 function showErrorPage() {
     document.getElementById("root").innerHTML = `

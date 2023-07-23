@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
 import "./PullToRefresh.css";
 import config from "./config.json";
@@ -16,26 +15,24 @@ function App() {
         useContext(Context);
 
     return (
-        <ErrorBoundary>
-            <div className="App">
-                <Overlay visible={!areAllImagesLoaded}>
-                    <ProgressBar
-                        current={totalImagesLoaded}
-                        total={totalWeatherImages}
-                        barWidth={config.progressBarWidth}
-                    />
-                    <div>{config.loadingMessage}</div>
-                </Overlay>
-                <Switch>
-                    <Route exact path="/">
-                        <Current />
-                    </Route>
-                    <Route exact path="/forecast">
-                        <Forecast />
-                    </Route>
-                </Switch>
-            </div>
-        </ErrorBoundary>
+        <div className="App">
+            <Overlay visible={!areAllImagesLoaded}>
+                <ProgressBar
+                    current={totalImagesLoaded}
+                    total={totalWeatherImages}
+                    barWidth={config.progressBarWidth}
+                />
+                <div>{config.loadingMessage}</div>
+            </Overlay>
+            <Switch>
+                <Route exact path="/">
+                    <Current />
+                </Route>
+                <Route exact path="/forecast">
+                    <Forecast />
+                </Route>
+            </Switch>
+        </div>
     );
 }
 

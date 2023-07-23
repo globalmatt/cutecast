@@ -55,6 +55,7 @@ test("Runs the error listener correctly", async () => {
                 <div class=\\"errorPage\\">
                     <div class=\\"errorPage__content\\">
                         <h1>Arrgh!</h1>
+                        <img src=\\"images/weatherGremlin.png\\" alt=\\"Weather Gremlin\\" width=\\"100\\" height=\\"100\\" />
                         <p>The weather gremlins have struck! I can't show you the weather right now. :(</p>
                         <button onClick=\\"window.location.reload()\\">Try Again</button>
                     </div>
@@ -104,6 +105,7 @@ test("Runs the unhanded rejection listener correctly", async () => {
                 <div class=\\"errorPage\\">
                     <div class=\\"errorPage__content\\">
                         <h1>Arrgh!</h1>
+                        <img src=\\"images/weatherGremlin.png\\" alt=\\"Weather Gremlin\\" width=\\"100\\" height=\\"100\\" />
                         <p>The weather gremlins have struck! I can't show you the weather right now. :(</p>
                         <button onClick=\\"window.location.reload()\\">Try Again</button>
                     </div>

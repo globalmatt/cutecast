@@ -26,7 +26,9 @@ export default function Forecast() {
 
     const currentTimeUTC = Math.round(new Date().getTime() / 1000);
     const next24HoursForecasts = forecastWeatherData.forecasts.filter(
-        (f) => f.forecastTimeUTC < currentTimeUTC + 86400
+        (f) =>
+            f.forecastTimeUTC > currentTimeUTC &&
+            f.forecastTimeUTC < currentTimeUTC + 86400
     );
 
     function getHour(timeUTC) {
@@ -140,7 +142,7 @@ export default function Forecast() {
                 />
                 <div className="forecast">
                     <ul className="threehour">
-                        <li key="now">
+                        <li key="now" aria-label="Now">
                             <span className="time">Now</span>
                             <span className="icon">
                                 {getIconImage(currentWeatherData.conditionIcon)}
@@ -150,7 +152,7 @@ export default function Forecast() {
                             </span>
                         </li>
                         {next24HoursForecasts.map((f, i) => (
-                            <li key={i}>
+                            <li key={i} aria-label={getHour(f.forecastTimeUTC)}>
                                 <span className="time">
                                     {getHour(f.forecastTimeUTC)}
                                 </span>
@@ -168,8 +170,12 @@ export default function Forecast() {
                         <tbody>
                             {getDailyForecasts().map((f, i) => (
                                 <tr key={i}>
-                                    <td className="weekday">{f.weekday}</td>
-                                    <td className="icon">
+                                    <th className="weekday">{f.weekday}</th>
+                                    <td
+                                        className="icon"
+                                        aria-label={f.conditionName}
+                                    >
+                                        {f.conditionName}
                                         {getIconImage(f.conditionIcon)}
                                     </td>
                                     <td className="maxTemp">

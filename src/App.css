@@ -133,7 +133,7 @@ body {
     font-size: 120%;
 }
 
-.forecast table.daily td.weekday {
+.forecast table.daily th {
     text-align: left;
 }
 

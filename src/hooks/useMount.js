@@ -1,11 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * Run an effect only once.
  *
- * Passes the supplied callback function to the `useEffect()` hook along
- * with an empty dependency array, ensuring that the callback will only
- * be called once.
+ * Passes the supplied callback function to the `useEffect()` hook,
+ * ensuring that the callback will only be called once.
  *
  * This not only makes the calling code neater, it also provides a way
  * to run an effect once without triggering the
@@ -19,5 +18,12 @@ import { useEffect } from "react";
  * `useEffect` hook.
  */
 export default function useMount(fun) {
-    useEffect(fun, []);
+    const mounted = useRef(false);
+
+    useEffect(() => {
+        if (!mounted.current) {
+            fun();
+            mounted.current = true;
+        }
+    }, [fun]);
 }

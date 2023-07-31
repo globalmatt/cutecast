@@ -7,7 +7,7 @@ import config from "../config.json";
  * @param {String} icon - The icon name.
  * @returns {JSX.Element} The icon's `<img />` element.
  */
-export default function getIconImage(icon) {
+export default function getIconImage(icon: string): JSX.Element {
     return (
         <img
             src={`${config.iconsUrl}/${icon}@2x.png`}

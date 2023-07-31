@@ -12,7 +12,7 @@ const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
  * @returns {(Object[]|false)} The current and forecast raw data, or
  * false if the fetching was throttled.
  */
-export default async function fetchWeatherData(lastWeatherFetchTime) {
+export default async function fetchWeatherData(lastWeatherFetchTime: number) {
     // Throttle the weather data fetching.
     const currentTime = new Date().getTime();
 
@@ -29,7 +29,7 @@ export default async function fetchWeatherData(lastWeatherFetchTime) {
     const currentWeather = await fetch(currentWeatherRequestUrl);
 
     if (!currentWeather.ok) {
-        throw Error(currentWeather.status);
+        throw Error(currentWeather.status.toString());
     }
 
     const currentWeatherDataRaw = await currentWeather.json();
@@ -39,7 +39,7 @@ export default async function fetchWeatherData(lastWeatherFetchTime) {
     const forecastWeather = await fetch(forecastWeatherRequestUrl);
 
     if (!forecastWeather.ok) {
-        throw Error(forecastWeather.status);
+        throw Error(forecastWeather.status.toString());
     }
 
     const forecastWeatherDataRaw = await forecastWeather.json();

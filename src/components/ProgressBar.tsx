@@ -2,6 +2,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+interface ProgressBarProps {
+    current: number;
+    total: number;
+    barWidth: number;
+}
+
+
 /**
  * A progress bar.
  *
@@ -9,7 +16,7 @@ import PropTypes from "prop-types";
  *
  * @returns {ReactElement} The `<Overlay />` component.
  */
-function ProgressBar({ current, total, barWidth }) {
+function ProgressBar({ current, total, barWidth }: ProgressBarProps) {
     function progressBarWidth() {
         if (total === 0) {
             return 0;

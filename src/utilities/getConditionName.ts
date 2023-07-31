@@ -1,5 +1,6 @@
-import conditionCodes from "../conditionCodes.json";
+
 import isDaytime from "./isDaytime";
+const conditionCodes = require( "../conditionCodes.json");
 
 /**
  * Given a condition code and current time information, return an
@@ -19,12 +20,12 @@ import isDaytime from "./isDaytime";
  * @returns {String} The condition name.
  */
 export default function getConditionName(
-    conditionCode,
-    timeUTC,
-    todaySunriseUTC,
-    todaySunsetUTC,
-    tomorrowSunriseUTC = null,
-    tomorrowSunsetUTC = null
+    conditionCode: number,
+    timeUTC: number,
+    todaySunriseUTC: number,
+    todaySunsetUTC: number,
+    tomorrowSunriseUTC: number | null = null,
+    tomorrowSunsetUTC: number | null = null
 ) {
     let conditionName = conditionCodes[conditionCode];
 

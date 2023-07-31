@@ -1,4 +1,6 @@
 import getConditionName from "./getConditionName";
+import RawForecastWeatherData from "../interfaces/RawForecastWeatherData";
+import ForecastWeatherData from "../interfaces/ForecastWeatherData";
 
 /**
  * Extract useful info from the "forecast weather" raw data returned
@@ -7,7 +9,7 @@ import getConditionName from "./getConditionName";
  * @param {Object} rawData The raw data.
  * @returns {Object} The extracted data.
  */
-export default function extractForecastWeatherData(rawData) {
+export default function extractForecastWeatherData(rawData: RawForecastWeatherData): ForecastWeatherData {
     const todaySunriseUTC = rawData.city.sunrise;
     const todaySunsetUTC = rawData.city.sunset;
     const tomorrowSunriseUTC = rawData.city.sunrise + 86400; // good-enough approximation

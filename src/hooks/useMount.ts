@@ -17,7 +17,7 @@ import { useEffect, useRef } from "react";
  * @param {function} fun - The callback function to pass to the
  * `useEffect` hook.
  */
-export default function useMount(fun) {
+export default function useMount(fun: Function): void {
     const mounted = useRef(false);
 
     useEffect(() => {

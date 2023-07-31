@@ -1,13 +1,18 @@
 // Vendors
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import PropTypes from "prop-types";
+
+type OverlayProps = PropsWithChildren<{
+    visible: boolean;
+}>;
+
 
 /**
  * A coloured overlay that covers the page while the images are loading.
  *
  * @returns {ReactElement} The `<Overlay />` component.
  */
-function Overlay({ visible, children }) {
+function Overlay({ visible, children }: OverlayProps) {
     return (
         <div className={visible ? "overlay" : "overlay hidden"}>
             <div className="content">{children}</div>

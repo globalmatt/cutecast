@@ -1,8 +1,7 @@
 import config from "../config.json";
 import weatherImages from "../weatherImages.json";
 import isDaytime from "./isDaytime";
-
-//
+import CurrentWeatherData from "../interfaces/CurrentWeatherData";
 
 /**
  * Get a random suitable image to represent the current weather.
@@ -14,7 +13,7 @@ import isDaytime from "./isDaytime";
  * @param {Object} currentWeatherData - The current weather data.
  * @returns {String} The URL of the selected weather image.
  */
-export default function getWeatherImageUrl(currentWeatherData) {
+export default function getWeatherImageUrl(currentWeatherData: CurrentWeatherData): string | null {
     const suitableImages = weatherImages.filter(
         (i) =>
             i.conditionCodes.includes(currentWeatherData.conditionCode) &&

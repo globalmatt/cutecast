@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { current } from "../testUtilities/testData";
 import extractCurrentWeatherData from "../utilities/extractCurrentWeatherData";
 
-import Current from "./Current";
+import CurrentWeather from "./CurrentWeather";
 import { Context } from "../Context";
 
 test("Renders the current weather correctly", () => {
@@ -16,7 +16,7 @@ test("Renders the current weather correctly", () => {
             }}
         >
             <BrowserRouter>
-                <Current />
+                <CurrentWeather />
             </BrowserRouter>
         </Context.Provider>
     );

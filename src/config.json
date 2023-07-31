@@ -2,7 +2,7 @@
     "weatherApiUrl": "https://api.openweathermap.org/data/2.5/",
     "weatherApiCurrentUrl": "weather?q=",
     "weatherApiForecastUrl": "forecast?q=",
-    "weatherFetchInterval": "6",
+    "weatherFetchInterval": 6,
     "imagesUrl": "/images",
     "iconsUrl": "/images/icons",
     "genericErrorMessage": "Sorry, something went wrong. Please try again.",

@@ -2,6 +2,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+interface CurrentWeatherImageProps {
+    currentWeatherImageUrl: string;
+}
+
 /**
  * Current Weather Image component.
  *
@@ -9,7 +13,7 @@ import PropTypes from "prop-types";
  *
  * @returns {ReactElement} The `<CurrentWeatherImage />` component.
  */
-export default function CurrentWeatherImage({ currentWeatherImageUrl }) {
+export default function CurrentWeatherImage({ currentWeatherImageUrl }: CurrentWeatherImageProps) {
     return (
         currentWeatherImageUrl && (
             <div className="weatherImage">

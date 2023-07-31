@@ -14,11 +14,11 @@
  * false if it's during the nighttime.
  */
 export default function isDaytime(
-    timeUTC,
-    todaySunriseUTC,
-    todaySunsetUTC,
-    tomorrowSunriseUTC = null,
-    tomorrowSunsetUTC = null
+    timeUTC: number,
+    todaySunriseUTC: number,
+    todaySunsetUTC: number,
+    tomorrowSunriseUTC: number | null = null,
+    tomorrowSunsetUTC: number | null = null
 ) {
     if (!tomorrowSunriseUTC || !tomorrowSunsetUTC) {
         return timeUTC > todaySunriseUTC && timeUTC <= todaySunsetUTC;

@@ -5,7 +5,7 @@ import { current, forecast } from "../testUtilities/testData";
 import extractForecastWeatherData from "../utilities/extractForecastWeatherData";
 import extractCurrentWeatherData from "../utilities/extractCurrentWeatherData";
 
-import Forecast from "./Forecast";
+import ForecastWeather from "./ForecastWeather";
 import { Context } from "../Context";
 
 function getHour(timeUTC) {
@@ -30,7 +30,7 @@ test("Renders the forecast weather correctly", () => {
             }}
         >
             <BrowserRouter>
-                <Forecast />
+                <ForecastWeather />
             </BrowserRouter>
         </Context.Provider>
     );

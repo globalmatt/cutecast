@@ -16,9 +16,10 @@ import { Context } from "../Context";
  *
  * @returns {ReactElement} The `<Current />` component.
  */
-export default function Current() {
+export default function CurrentWeather() {
     const { currentWeatherData, currentWeatherImageUrl, fetchWeather } =
         useContext(Context);
+
 
     return (
         <PullToRefresh onRefresh={fetchWeather} className="refresh-view">

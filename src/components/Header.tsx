@@ -1,6 +1,12 @@
 // Vendors
 import React from "react";
 import PropTypes from "prop-types";
+import CurrentWeatherData from "../interfaces/CurrentWeatherData";
+
+interface HeaderProps {
+    currentWeatherData: CurrentWeatherData;
+}
+
 
 /**
  * The header for the "Current Weather" page.
@@ -10,7 +16,7 @@ import PropTypes from "prop-types";
  *
  * @returns {ReactElement} The `<Header />` component.
  */
-export default function Header({ currentWeatherData }) {
+export default function Header({ currentWeatherData }: HeaderProps) {
     return (
         <div className="header">
             <h1>{currentWeatherData.cityName}</h1>

@@ -1,6 +1,12 @@
 // Vendors
-import React, { createContext, useEffect, useState } from "react";
+import React, { PropsWithChildren, createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+
+// Types
+import RawCurrentWeatherData from "./interfaces/RawCurrentWeatherData";
+import RawForecastWeatherData from "./interfaces/RawForecastWeatherData";
+import CurrentWeatherData from "./interfaces/CurrentWeatherData";
+import ForecastWeatherData from "./interfaces/ForecastWeatherData";
 
 // Hooks
 import useMount from "./hooks/useMount";
@@ -15,7 +21,18 @@ import extractForecastWeatherData from "./utilities/extractForecastWeatherData";
 import preloadWeatherImages from "./utilities/preloadWeatherImages";
 import getWeatherImageUrl from "./utilities/getWeatherImageUrl";
 
-const Context = createContext();
+interface ContextType {
+    currentWeatherData: CurrentWeatherData;
+    currentWeatherImageUrl: string;
+    forecastWeatherData: ForecastWeatherData;
+    lastWeatherFetchTime: number;
+    totalWeatherImages: number;
+    totalImagesLoaded: number;
+    areAllImagesLoaded: boolean;
+    fetchWeather(): Promise<void>;
+};
+
+const Context = createContext({} as ContextType);
 
 /**
  * Renders the supplied content (app) wrapped inside a
@@ -28,13 +45,11 @@ const Context = createContext();
  * @returns {ReactElement} The content wrapped inside the
  * `<Context.Provider />` component.
  */
-function ContextProvider({ children }) {
-    const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState({});
-    const [currentWeatherData, setCurrentWeatherData] = useState({});
-    const [forecastWeatherDataRaw, setForecastWeatherDataRaw] = useState({});
-    const [forecastWeatherData, setForecastWeatherData] = useState({
-        forecasts: [],
-    });
+function ContextProvider(props: PropsWithChildren ) {
+    const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState({} as RawCurrentWeatherData);
+    const [currentWeatherData, setCurrentWeatherData] = useState({} as CurrentWeatherData);
+    const [forecastWeatherDataRaw, setForecastWeatherDataRaw] = useState({} as RawForecastWeatherData);
+    const [forecastWeatherData, setForecastWeatherData] = useState({} as ForecastWeatherData);
     const [lastWeatherFetchTime, setLastWeatherFetchTime] = useState(0);
     const [currentWeatherImageUrl, setCurrentWeatherImageUrl] = useState("");
     const [totalWeatherImages, setTotalWeatherImages] = useState(0);
@@ -81,7 +96,7 @@ function ContextProvider({ children }) {
     // Pick an image for the current weather
     useEffect(() => {
         if (Object.entries(currentWeatherData).length > 0) {
-            setCurrentWeatherImageUrl(getWeatherImageUrl(currentWeatherData));
+            setCurrentWeatherImageUrl(getWeatherImageUrl(currentWeatherData) || "");
         }
     }, [currentWeatherData]);
 
@@ -117,7 +132,7 @@ function ContextProvider({ children }) {
                 fetchWeather,
             }}
         >
-            {children}
+            {props.children}
         </Context.Provider>
     );
 }

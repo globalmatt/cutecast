@@ -1,6 +1,5 @@
-
 import isDaytime from "./isDaytime";
-const conditionCodes = require( "../conditionCodes.json");
+const conditionCodes = require("../conditionCodes.json");
 
 /**
  * Given a condition code and current time information, return an

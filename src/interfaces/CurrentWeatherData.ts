@@ -8,4 +8,4 @@ export default interface CurrentWeatherData {
     tempC: number;
     sunriseUTC: number;
     sunsetUTC: number;
-};
+}

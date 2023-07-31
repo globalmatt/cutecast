@@ -22,7 +22,7 @@ import isDaytime from "../utilities/isDaytime";
  * Renders the Forecast page, comprising the header, weather forecast,
  * and footer.
  *
- * @returns {ReactElement} The `<Current />` component.
+ * @returns {ReactElement} The `<ForecastWeather />` component.
  */
 export default function ForecastWeather() {
     const { currentWeatherData, currentWeatherImageUrl, forecastWeatherData } =
@@ -30,8 +30,8 @@ export default function ForecastWeather() {
 
     if (!forecastWeatherData.forecasts) {
         return null;
-    }    
-    
+    }
+
     const currentTimeUTC = Math.round(new Date().getTime() / 1000);
     const next24HoursForecasts = forecastWeatherData.forecasts.filter(
         (f) =>
@@ -103,7 +103,7 @@ export default function ForecastWeather() {
             }
         });
 
-        if ( modalConditionIcon === null ) {
+        if (modalConditionIcon === null) {
             throw new Error("No modal condition icon found");
         } else {
             return modalConditionIcon;

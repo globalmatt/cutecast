@@ -9,7 +9,9 @@ import CurrentWeatherData from "../interfaces/CurrentWeatherData";
  * @param {Object} rawData The raw data.
  * @returns {Object} The extracted data.
  */
-export default function extractCurrentWeatherData(rawData: RawCurrentWeatherData): CurrentWeatherData {
+export default function extractCurrentWeatherData(
+    rawData: RawCurrentWeatherData
+): CurrentWeatherData {
     return {
         cityName: rawData.name,
         cityId: rawData.id,

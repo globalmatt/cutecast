@@ -9,7 +9,9 @@ import ForecastWeatherData from "../interfaces/ForecastWeatherData";
  * @param {Object} rawData The raw data.
  * @returns {Object} The extracted data.
  */
-export default function extractForecastWeatherData(rawData: RawForecastWeatherData): ForecastWeatherData {
+export default function extractForecastWeatherData(
+    rawData: RawForecastWeatherData
+): ForecastWeatherData {
     const todaySunriseUTC = rawData.city.sunrise;
     const todaySunsetUTC = rawData.city.sunset;
     const tomorrowSunriseUTC = rawData.city.sunrise + 86400; // good-enough approximation

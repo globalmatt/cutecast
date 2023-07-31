@@ -7,7 +7,7 @@
  */
 export default function addFatalErrorHandler() {
     window.addEventListener("error", errorListener);
-    window.addEventListener( "unhandledrejection", unhandledrejectionListener );
+    window.addEventListener("unhandledrejection", unhandledrejectionListener);
 }
 
 function errorListener(event: ErrorEvent): void {
@@ -18,14 +18,17 @@ function errorListener(event: ErrorEvent): void {
 
 function unhandledrejectionListener(event: PromiseRejectionEvent): void {
     console.error("App: Unhandled Rejection", event.reason.message);
-    window.removeEventListener("unhandledrejection", unhandledrejectionListener);
+    window.removeEventListener(
+        "unhandledrejection",
+        unhandledrejectionListener
+    );
     showErrorPage();
 }
 
 function showErrorPage() {
     const root = document.getElementById("root");
 
-    if ( root ) {
+    if (root) {
         root.innerHTML = `
             <div class="errorPage">
                 <div class="errorPage__content">
@@ -36,5 +39,5 @@ function showErrorPage() {
                 </div>
             </div>
         `;
-    };
+    }
 }

@@ -13,7 +13,9 @@ import CurrentWeatherData from "../interfaces/CurrentWeatherData";
  * @param {Object} currentWeatherData - The current weather data.
  * @returns {String} The URL of the selected weather image.
  */
-export default function getWeatherImageUrl(currentWeatherData: CurrentWeatherData): string | null {
+export default function getWeatherImageUrl(
+    currentWeatherData: CurrentWeatherData
+): string | null {
     const suitableImages = weatherImages.filter(
         (i) =>
             i.conditionCodes.includes(currentWeatherData.conditionCode) &&

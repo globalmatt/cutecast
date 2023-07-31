@@ -14,12 +14,11 @@ import { Context } from "../Context";
  * Renders the Current Weather page, comprising the header, current
  * weather image, and footer.
  *
- * @returns {ReactElement} The `<Current />` component.
+ * @returns {ReactElement} The `<CurrentWeather />` component.
  */
 export default function CurrentWeather() {
     const { currentWeatherData, currentWeatherImageUrl, fetchWeather } =
         useContext(Context);
-
 
     return (
         <PullToRefresh onRefresh={fetchWeather} className="refresh-view">

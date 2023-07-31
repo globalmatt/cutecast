@@ -15,4 +15,4 @@ export default interface RawCurrentWeatherData {
         sunrise: number;
         sunset: number;
     };
-};
+}

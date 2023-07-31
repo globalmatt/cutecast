@@ -14,7 +14,9 @@ interface HeaderForecastProps {
  *
  * @returns {ReactElement} The `<HeaderForecast />` component.
  */
-export default function HeaderForecast({ currentWeatherData }: HeaderForecastProps) {
+export default function HeaderForecast({
+    currentWeatherData,
+}: HeaderForecastProps) {
     return (
         <div className="header-forecast">
             <h1>{currentWeatherData.cityName} Forecast</h1>

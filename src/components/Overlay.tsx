@@ -6,7 +6,6 @@ type OverlayProps = PropsWithChildren<{
     visible: boolean;
 }>;
 
-
 /**
  * A coloured overlay that covers the page while the images are loading.
  *

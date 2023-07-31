@@ -8,7 +8,6 @@ interface ProgressBarProps {
     barWidth: number;
 }
 
-
 /**
  * A progress bar.
  *

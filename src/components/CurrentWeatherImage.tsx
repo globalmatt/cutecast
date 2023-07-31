@@ -13,7 +13,9 @@ interface CurrentWeatherImageProps {
  *
  * @returns {ReactElement} The `<CurrentWeatherImage />` component.
  */
-export default function CurrentWeatherImage({ currentWeatherImageUrl }: CurrentWeatherImageProps) {
+export default function CurrentWeatherImage({
+    currentWeatherImageUrl,
+}: CurrentWeatherImageProps) {
     return (
         currentWeatherImageUrl && (
             <div className="weatherImage">

@@ -16,4 +16,4 @@ export default interface RawForecastWeatherData {
             icon: string;
         }[];
     }[];
-};
+}

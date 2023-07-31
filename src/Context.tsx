@@ -1,5 +1,10 @@
 // Vendors
-import React, { PropsWithChildren, createContext, useEffect, useState } from "react";
+import React, {
+    PropsWithChildren,
+    createContext,
+    useEffect,
+    useState,
+} from "react";
 import PropTypes from "prop-types";
 
 // Types
@@ -30,7 +35,7 @@ interface ContextType {
     totalImagesLoaded: number;
     areAllImagesLoaded: boolean;
     fetchWeather(): Promise<void>;
-};
+}
 
 const Context = createContext({} as ContextType);
 
@@ -45,11 +50,19 @@ const Context = createContext({} as ContextType);
  * @returns {ReactElement} The content wrapped inside the
  * `<Context.Provider />` component.
  */
-function ContextProvider(props: PropsWithChildren ) {
-    const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState({} as RawCurrentWeatherData);
-    const [currentWeatherData, setCurrentWeatherData] = useState({} as CurrentWeatherData);
-    const [forecastWeatherDataRaw, setForecastWeatherDataRaw] = useState({} as RawForecastWeatherData);
-    const [forecastWeatherData, setForecastWeatherData] = useState({} as ForecastWeatherData);
+function ContextProvider(props: PropsWithChildren) {
+    const [currentWeatherDataRaw, setCurrentWeatherDataRaw] = useState(
+        {} as RawCurrentWeatherData
+    );
+    const [currentWeatherData, setCurrentWeatherData] = useState(
+        {} as CurrentWeatherData
+    );
+    const [forecastWeatherDataRaw, setForecastWeatherDataRaw] = useState(
+        {} as RawForecastWeatherData
+    );
+    const [forecastWeatherData, setForecastWeatherData] = useState(
+        {} as ForecastWeatherData
+    );
     const [lastWeatherFetchTime, setLastWeatherFetchTime] = useState(0);
     const [currentWeatherImageUrl, setCurrentWeatherImageUrl] = useState("");
     const [totalWeatherImages, setTotalWeatherImages] = useState(0);
@@ -96,7 +109,9 @@ function ContextProvider(props: PropsWithChildren ) {
     // Pick an image for the current weather
     useEffect(() => {
         if (Object.entries(currentWeatherData).length > 0) {
-            setCurrentWeatherImageUrl(getWeatherImageUrl(currentWeatherData) || "");
+            setCurrentWeatherImageUrl(
+                getWeatherImageUrl(currentWeatherData) || ""
+            );
         }
     }, [currentWeatherData]);
 

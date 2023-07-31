@@ -7,7 +7,6 @@ interface HeaderProps {
     currentWeatherData: CurrentWeatherData;
 }
 
-
 /**
  * The header for the "Current Weather" page.
  *

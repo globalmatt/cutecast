@@ -79,7 +79,7 @@ function ContextProvider(props: PropsWithChildren) {
     // Fetch the latest weather data
     async function fetchWeather() {
         const res = await fetchWeatherData(lastWeatherFetchTime);
-        if (res) {
+        if (typeof res !== "boolean") {
             setCurrentWeatherDataRaw(res[0]);
             setForecastWeatherDataRaw(res[1]);
             setLastWeatherFetchTime(new Date().getTime());

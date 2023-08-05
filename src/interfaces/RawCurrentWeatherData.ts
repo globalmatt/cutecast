@@ -3,8 +3,9 @@ export default interface RawCurrentWeatherData {
     id: number;
     weather: [
         {
-            main: string;
             id: number;
+            main: string;
+            description: string;
             icon: string;
         }
     ];

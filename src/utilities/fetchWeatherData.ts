@@ -1,4 +1,6 @@
 // Config
+import RawCurrentWeatherData from "../interfaces/RawCurrentWeatherData";
+import RawForecastWeatherData from "../interfaces/RawForecastWeatherData";
 import config from "../config.json";
 const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -9,10 +11,13 @@ const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
  * @param {Number} lastWeatherFetchTime When the data was last fetched
  * (in UTC). Used to throttle the API calls.
  *
- * @returns {(Object[]|false)} The current and forecast raw data, or
- * false if the fetching was throttled.
+ * @returns {[RawCurrentWeatherData, RawForecastWeatherData] | boolean}
+ * The current and forecast raw data, or false if the fetching was
+ * throttled.
  */
-export default async function fetchWeatherData(lastWeatherFetchTime: number) {
+export default async function fetchWeatherData(
+    lastWeatherFetchTime: number
+): Promise<[RawCurrentWeatherData, RawForecastWeatherData] | boolean> {
     // Throttle the weather data fetching.
     const currentTime = new Date().getTime();
 
@@ -32,7 +37,8 @@ export default async function fetchWeatherData(lastWeatherFetchTime: number) {
         throw Error(currentWeather.status.toString());
     }
 
-    const currentWeatherDataRaw = await currentWeather.json();
+    const currentWeatherDataRaw: RawCurrentWeatherData =
+        await currentWeather.json();
 
     // Get forecast weather by city.
     const forecastWeatherRequestUrl = `${config.weatherApiUrl}${config.weatherApiForecastUrl}Robertson,NSW,AU&units=metric&appid=${weatherApiKey}`;
@@ -42,6 +48,7 @@ export default async function fetchWeatherData(lastWeatherFetchTime: number) {
         throw Error(forecastWeather.status.toString());
     }
 
-    const forecastWeatherDataRaw = await forecastWeather.json();
+    const forecastWeatherDataRaw: RawForecastWeatherData =
+        await forecastWeather.json();
     return [currentWeatherDataRaw, forecastWeatherDataRaw];
 }

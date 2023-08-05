@@ -16,12 +16,24 @@ test("App runs and displays progress bar initially", async () => {
     render(
         <Context.Provider
             value={{
-                currentWeatherData: {},
+                currentWeatherData: {
+                    cityName: "",
+                    cityId: 0,
+                    conditionGroup: "",
+                    conditionCode: 0,
+                    conditionIcon: "",
+                    conditionName: "",
+                    tempC: 0,
+                    sunriseUTC: 0,
+                    sunsetUTC: 0,
+                },
                 currentWeatherImageUrl: "",
-                forecastWeatherData: {},
+                forecastWeatherData: { cityName: "", cityId: 0, forecasts: [] },
+                lastWeatherFetchTime: 0,
                 totalWeatherImages: 10,
                 totalImagesLoaded: 1,
                 areAllImagesLoaded: false,
+                fetchWeather: async () => {},
             }}
         >
             {" "}
@@ -48,10 +60,11 @@ test("App displays current weather once images and data have loaded", async () =
                 forecastWeatherData: extractForecastWeatherData(
                     forecast.json()
                 ),
-
+                lastWeatherFetchTime: 0,
                 totalWeatherImages: 10,
                 totalImagesLoaded: 1,
                 areAllImagesLoaded: false,
+                fetchWeather: async () => {},
             }}
         >
             {" "}

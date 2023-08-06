@@ -8,8 +8,9 @@ test("Extracts raw weather data correctly", () => {
             weather: [
                 {
                     main: "condition group",
-                    id: "condition code",
+                    id: 123,
                     icon: "condition icon",
+                    description: "description",
                 },
             ],
             sys: {
@@ -24,7 +25,7 @@ test("Extracts raw weather data correctly", () => {
         cityName: "Sydney",
         cityId: 123,
         conditionGroup: "condition group",
-        conditionCode: "condition code",
+        conditionCode: 123,
         conditionIcon: "condition icon",
         conditionName: expect.anything(),
         sunriseUTC: 1,

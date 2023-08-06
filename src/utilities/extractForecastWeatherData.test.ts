@@ -11,11 +11,11 @@ test("Extracts raw weather data correctly", () => {
             },
             list: [
                 {
-                    dt: new Date(),
+                    dt: 0,
                     weather: [
                         {
                             main: "condition group",
-                            id: "condition code",
+                            id: 123,
                             icon: "condition icon",
                         },
                     ],
@@ -32,7 +32,7 @@ test("Extracts raw weather data correctly", () => {
             {
                 forecastTimeUTC: expect.anything(),
                 conditionGroup: "condition group",
-                conditionCode: "condition code",
+                conditionCode: 123,
                 conditionIcon: "condition icon",
                 conditionName: expect.anything(),
                 tempC: 30,

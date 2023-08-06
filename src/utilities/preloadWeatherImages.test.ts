@@ -4,7 +4,7 @@ import mockImageLoadEvent from "../testUtilities/mockImageLoadEvent";
 mockImageLoadEvent();
 
 test("Preloads the weather images correctly", (done) => {
-    function imageLoadHandler(event) {
+    function imageLoadHandler(event: Event) {
         try {
             expect(event.target).toBeInstanceOf(HTMLImageElement);
             done();

@@ -28,14 +28,14 @@ test("Runs the error listener correctly", async () => {
 
     let el = {
         innerHTML: "",
-    };
+    } as HTMLElement;
 
     document.getElementById = jest.fn(() => el);
 
     // Mock just the first call to addEventListener.
     window.addEventListener = jest
         .fn()
-        .mockImplementationOnce((event, callback) => (listener = callback));
+        .mockImplementationOnce((_event, callback) => (listener = callback));
 
     window.removeEventListener = jest.fn();
 
@@ -74,15 +74,15 @@ test("Runs the unhanded rejection listener correctly", async () => {
 
     let el = {
         innerHTML: "",
-    };
+    } as HTMLElement;
 
     document.getElementById = jest.fn(() => el);
 
     // Mock just the second call to addEventListener.
     window.addEventListener = jest
         .fn()
-        .mockImplementationOnce()
-        .mockImplementationOnce((event, callback) => (listener = callback));
+        .mockImplementationOnce(() => {})
+        .mockImplementationOnce((_event, callback) => (listener = callback));
 
     window.removeEventListener = jest.fn();
 

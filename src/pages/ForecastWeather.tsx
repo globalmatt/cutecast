@@ -141,18 +141,20 @@ export default function ForecastWeather() {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <div id="content" onClick={() => setChromeVisible(!chromeVisible)}>
+            <div id="content">
                 <HeaderForecast
                     currentWeatherData={currentWeatherData}
                     isVisible={chromeVisible}
                 />
                 <CurrentWeatherImage
                     currentWeatherImageUrl={currentWeatherImageUrl}
+                    onClick={() => setChromeVisible(!chromeVisible)}
                 />
                 <div
                     className={
                         "forecast" + (chromeVisible ? " visible" : " hidden")
                     }
+                    onClick={() => setChromeVisible(!chromeVisible)}
                 >
                     <ul className="threehour">
                         <li key="now" aria-label="Now">

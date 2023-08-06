@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 interface CurrentWeatherImageProps {
     currentWeatherImageUrl: string;
+    onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 /**
@@ -15,10 +16,11 @@ interface CurrentWeatherImageProps {
  */
 export default function CurrentWeatherImage({
     currentWeatherImageUrl,
+    onClick,
 }: CurrentWeatherImageProps) {
     return (
         currentWeatherImageUrl && (
-            <div className="weatherImage">
+            <div className="weatherImage" onClick={onClick}>
                 <img src={currentWeatherImageUrl} alt="Weather drawing" />
             </div>
         )

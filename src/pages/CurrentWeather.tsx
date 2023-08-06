@@ -24,13 +24,14 @@ export default function CurrentWeather() {
 
     return (
         <PullToRefresh onRefresh={fetchWeather} className="refresh-view">
-            <div id="content" onClick={() => setChromeVisible(!chromeVisible)}>
+            <div id="content">
                 <Header
                     currentWeatherData={currentWeatherData}
                     isVisible={chromeVisible}
                 />
                 <CurrentWeatherImage
                     currentWeatherImageUrl={currentWeatherImageUrl}
+                    onClick={() => setChromeVisible(!chromeVisible)}
                 />
                 <Footer isVisible={chromeVisible} />
             </div>

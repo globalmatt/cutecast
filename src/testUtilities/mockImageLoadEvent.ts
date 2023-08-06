@@ -31,7 +31,7 @@
  * @see https://github.com/timarney/react-app-rewired/
  */
 export default function mockImageLoadEvent() {
-    let originalImageSrcProto;
+    let originalImageSrcProto: any;
 
     beforeAll(() => {
         // Keep a copy of the original Image.prototype.src
@@ -44,7 +44,7 @@ export default function mockImageLoadEvent() {
         // Mock the `Image.prototype.src` setter to fire the `load` event.
         Object.defineProperty(global.Image.prototype, "src", {
             // Define the property setter
-            set(src) {
+            set() {
                 setTimeout(() => {
                     const event = new Event("load");
                     this.dispatchEvent(event);

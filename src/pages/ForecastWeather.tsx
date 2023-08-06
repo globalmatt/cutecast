@@ -15,6 +15,7 @@ import { Context } from "../Context";
 import getIconImage from "../utilities/getIconImage";
 import getMidnightTodayUTC from "../utilities/getMidnightTodayUTC";
 import isDaytime from "../utilities/isDaytime";
+import getForecastsForDay from "../utilities/getForecastsForDay";
 
 /**
  * The Forecast page.
@@ -45,19 +46,8 @@ export default function ForecastWeather() {
             .replace(/\s/g, "");
     }
 
-    function getForecastsForDay(date: Date): Array<Forecast> {
-        const dateUTC = date.getTime() / 1000;
-
-        // Return all forecasts for this day
-        return forecastWeatherData.forecasts.filter(
-            (f) =>
-                f.forecastTimeUTC >= dateUTC &&
-                f.forecastTimeUTC < dateUTC + 86400
-        );
-    }
-
     function getModalConditionIconForDay(date: Date): string {
-        const forecastsForDay = getForecastsForDay(date);
+        const forecastsForDay = getForecastsForDay(forecastWeatherData, date);
         let midnightTodayUTC = getMidnightTodayUTC();
         const daysAfterToday = Math.round(
             (date.getTime() / 1000 - midnightTodayUTC.getTime() / 1000) / 86400
@@ -67,13 +57,13 @@ export default function ForecastWeather() {
         // and store in an object ( {'01d': 3, '04d': 5, ...} )
         const conditionFrequencies = forecastsForDay.reduce(function (
             allConditions: { [key: string]: number },
-            f
+            forecast: Forecast
         ) {
             // (Skip night-time conditions since we generally assume
             // the daily forecast is for the daytime)
             if (
                 isDaytime(
-                    f.forecastTimeUTC,
+                    forecast.forecastTimeUTC,
                     currentWeatherData.sunriseUTC + 86400 * daysAfterToday,
                     currentWeatherData.sunsetUTC + 86400 * daysAfterToday,
                     currentWeatherData.sunriseUTC +
@@ -81,10 +71,10 @@ export default function ForecastWeather() {
                     currentWeatherData.sunsetUTC + 86400 * (daysAfterToday + 1)
                 )
             ) {
-                if (f.conditionIcon in allConditions) {
-                    allConditions[f.conditionIcon]++;
+                if (forecast.conditionIcon in allConditions) {
+                    allConditions[forecast.conditionIcon]++;
                 } else {
-                    allConditions[f.conditionIcon] = 1;
+                    allConditions[forecast.conditionIcon] = 1;
                 }
             }
 
@@ -111,7 +101,7 @@ export default function ForecastWeather() {
     }
 
     function getMaxTempForDay(date: Date) {
-        const forecastsForDay = getForecastsForDay(date);
+        const forecastsForDay = getForecastsForDay(forecastWeatherData, date);
 
         // Calculate the max temp
         return forecastsForDay
@@ -120,7 +110,7 @@ export default function ForecastWeather() {
     }
 
     function getMinTempForDay(date: Date) {
-        const forecastsForDay = getForecastsForDay(date);
+        const forecastsForDay = getForecastsForDay(forecastWeatherData, date);
 
         // Calculate the max temp
         return forecastsForDay

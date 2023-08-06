@@ -13,6 +13,12 @@ test("Renders the current weather correctly", () => {
             value={{
                 currentWeatherData: extractCurrentWeatherData(current.json()),
                 currentWeatherImageUrl: "http://localhost/test.jpg",
+                forecastWeatherData: { cityName: "", cityId: 0, forecasts: [] },
+                lastWeatherFetchTime: 0,
+                totalWeatherImages: 10,
+                totalImagesLoaded: 1,
+                areAllImagesLoaded: false,
+                fetchWeather: async () => {},
             }}
         >
             <BrowserRouter>

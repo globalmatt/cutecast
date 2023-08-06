@@ -5,6 +5,7 @@ import CurrentWeatherData from "../interfaces/CurrentWeatherData";
 
 interface HeaderForecastProps {
     currentWeatherData: CurrentWeatherData;
+    isVisible: boolean;
 }
 
 /**
@@ -16,9 +17,12 @@ interface HeaderForecastProps {
  */
 export default function HeaderForecast({
     currentWeatherData,
+    isVisible,
 }: HeaderForecastProps) {
     return (
-        <div className="header-forecast">
+        <div
+            className={"header-forecast" + (isVisible ? " visible" : " hidden")}
+        >
             <h1>{currentWeatherData.cityName} Forecast</h1>
         </div>
     );

@@ -5,6 +5,7 @@ import CurrentWeatherData from "../interfaces/CurrentWeatherData";
 
 interface HeaderProps {
     currentWeatherData: CurrentWeatherData;
+    isVisible: boolean;
 }
 
 /**
@@ -15,9 +16,9 @@ interface HeaderProps {
  *
  * @returns {ReactElement} The `<Header />` component.
  */
-export default function Header({ currentWeatherData }: HeaderProps) {
+export default function Header({ currentWeatherData, isVisible }: HeaderProps) {
     return (
-        <div className="header">
+        <div className={"header" + (isVisible ? " visible" : " hidden")}>
             <h1>{currentWeatherData.cityName}</h1>
             <h2>
                 {currentWeatherData.conditionName},{" "}

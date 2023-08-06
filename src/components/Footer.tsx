@@ -2,6 +2,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+interface FooterProps {
+    isVisible: boolean;
+}
+
 /**
  * The app footer.
  *
@@ -9,9 +13,9 @@ import { Link } from "react-router-dom";
  *
  * @returns {ReactElement} The `<Footer />` component.
  */
-export default function Footer() {
+export default function Footer({ isVisible }: FooterProps) {
     return (
-        <div className="footer">
+        <div className={"footer" + (isVisible ? " visible" : " hidden")}>
             <nav>
                 <ul>
                     <li>

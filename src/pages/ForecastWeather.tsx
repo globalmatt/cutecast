@@ -29,6 +29,8 @@ export default function ForecastWeather() {
     const { currentWeatherData, currentWeatherImageUrl, forecastWeatherData } =
         useContext(Context);
 
+    const [chromeVisible, setChromeVisible] = React.useState(true);
+
     if (!forecastWeatherData.forecasts) {
         return null;
     }
@@ -139,12 +141,19 @@ export default function ForecastWeather() {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <div id="content">
-                <HeaderForecast currentWeatherData={currentWeatherData} />
+            <div id="content" onClick={() => setChromeVisible(!chromeVisible)}>
+                <HeaderForecast
+                    currentWeatherData={currentWeatherData}
+                    isVisible={chromeVisible}
+                />
                 <CurrentWeatherImage
                     currentWeatherImageUrl={currentWeatherImageUrl}
                 />
-                <div className="forecast">
+                <div
+                    className={
+                        "forecast" + (chromeVisible ? " visible" : " hidden")
+                    }
+                >
                     <ul className="threehour">
                         <li key="now" aria-label="Now">
                             <span className="time">Now</span>
@@ -193,7 +202,7 @@ export default function ForecastWeather() {
                         </tbody>
                     </table>
                 </div>
-                <Footer />
+                <Footer isVisible={chromeVisible} />
             </div>
         </div>
     );

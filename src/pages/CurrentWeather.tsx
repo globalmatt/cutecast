@@ -20,14 +20,19 @@ export default function CurrentWeather() {
     const { currentWeatherData, currentWeatherImageUrl, fetchWeather } =
         useContext(Context);
 
+    const [chromeVisible, setChromeVisible] = React.useState(true);
+
     return (
         <PullToRefresh onRefresh={fetchWeather} className="refresh-view">
-            <div id="content">
-                <Header currentWeatherData={currentWeatherData} />
+            <div id="content" onClick={() => setChromeVisible(!chromeVisible)}>
+                <Header
+                    currentWeatherData={currentWeatherData}
+                    isVisible={chromeVisible}
+                />
                 <CurrentWeatherImage
                     currentWeatherImageUrl={currentWeatherImageUrl}
                 />
-                <Footer />
+                <Footer isVisible={chromeVisible} />
             </div>
         </PullToRefresh>
     );

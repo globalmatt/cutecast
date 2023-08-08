@@ -1,3 +1,4 @@
+// System under test
 import isDaytime from "./isDaytime";
 
 test("Returns true if during daytime today", () => {

@@ -1,6 +1,10 @@
+// Fixtures
 import { forecast } from "../testUtilities/testData";
+
+// Helper functions
 import extractForecastWeatherData from "../utilities/extractForecastWeatherData";
 
+// System under test
 import getForecastsForDay from "./getForecastsForDay";
 
 test("Returns all forecasts for a given day", () => {
